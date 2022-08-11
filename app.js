@@ -7,11 +7,13 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 //const passportLocalMongoose;
 const User = require('./models/user');
+const session = require('express-session');
 
 // require routes
 const indexRouter = require('./routes/index');
 const booksRouter = require('./routes/books');
 const ordersRouter = require('./routes/orders');
+
 
 const app = express();
 
@@ -26,6 +28,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure Passport and Sessions
+app.use(session({
+  secret: 'hang ten dude!',
+  resave: false,
+  saveUninitialized: true
+}));
 
 passport.use(User.createStrategy());
 
