@@ -1,39 +1,39 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET books index /books */
+/* GET GetlAllBooks /api/books */
 router.get('/', (req, res, next) => {
-    res.send('INDEX /books');
+    res.send('INDEX /api/books');
 });
 
-/* GET books new /books/new */
+/* GET books new /api/books/new */
 router.get('/new', (req, res, next) => {
-    res.send('NEW /books/new');
+    res.send('NEW /api/books/new');
 });
 
-/* POST books create /books */
+/* POST StoreBooks create /api/books */
 router.post('/', (req, res, next) => {
-    res.send('CREATE /books');
+    res.send('CREATE /api/books');
 });
 
-/* GET books show /books/:id */
+/* GET GetBook /books/:id  ()*/
 router.get('/:id', (req, res, next) => {
-    res.send('SHOW /books/:id');
+    res.send('SHOW /api/books/:id');
 });
 
-/* GET books edit /books/:id/edit */
+/* GET books edit /api/books/:id/edit */
 router.get('/:id/edit', (req, res, next) => {
-    res.send('EDIT /books/:id/edit');
+    res.send('EDIT /api/books/:id/edit');
 });
 
-/* PUT books update /books/:id */
+/* PUT books update /api/books/:id */
 router.put('/:id', (req, res, next) => {
-    res.send('UPDATE /books/:id');
+    res.send('UPDATE /api/books/:id');
 });
 
-/* DELETE books destroy /books/:id */
+/* DELETE books destroy /api/books/:id */
 router.delete('/:id', (req, res, next) => {
-    res.send('DESTROY /books/:id');
+    res.send('DESTROY /api/books/:id');
 });
 
 module.exports = router;

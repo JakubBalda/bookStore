@@ -41,7 +41,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //Mount routes
 app.use('/', indexRouter);
-app.use('/books', booksRouter);
+app.use('/api/books', booksRouter);
 app.use('/orders', ordersRouter);
 
 
