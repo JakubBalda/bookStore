@@ -5,14 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-//const passportLocalMongoose;
 const User = require('./models/user');
 const session = require('express-session');
 
 // require routes
 const indexRouter = require('./routes/index');
 const booksRouter = require('./routes/books');
-const ordersRouter = require('./routes/orders');
 
 
 const app = express();
@@ -42,7 +40,6 @@ passport.deserializeUser(User.deserializeUser());
 //Mount routes
 app.use('/', indexRouter);
 app.use('/api/books', booksRouter);
-app.use('/orders', ordersRouter);
 
 
 // catch 404 and forward to error handler

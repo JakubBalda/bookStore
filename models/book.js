@@ -13,13 +13,3 @@ const BookSchema = new Schema({
 })
 
 module.exports = mongoose.model('Book', BookSchema);
-
-/*
-- Id: Int,
-- Title: string,
-- Author: string,
-- Description: string
-- ISBN: string
-- Price: Double
-- Amount: Int
-- Image: blob file*/
