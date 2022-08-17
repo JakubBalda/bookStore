@@ -1,13 +1,17 @@
-const xml2js = require('xml2js');
-const fs = require('fs');
-const parser = new xml2js.Parser({attrkey: "ATTR"});
+const fs = require('fs');   
+const reader = require('xml2js');
+const parser = new reader.Parser();
 
-let xmlString = fs.readFileSync("../data/books.xml", "utf-8");
+function parseXml(){
+    console.log('parsing started');
+    let books;
 
-parser.parseString(xmlString, (error, result) => {
-    if(error === null){
-        console.log(result);
-    }else{
-        console.log(error);
-    }
-})
+    let xmlData = fs.readFileSync(__dirname+'/../data/books.xml','utf-8');
+        parser.parseString(xmlData, (err, result) => {
+            books = result;
+        })
+
+    return books;
+}
+
+module.exports.parseXml = parseXml;

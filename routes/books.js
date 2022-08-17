@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const getAllBooks = require('../controllers/book.js');
+const { getBooks } = require('../controllers/books');
+const { errorHandler } = require('../middleware/index');
 
 /* GET GetlAllBooks /api/books */
-router.get('/', getAllBooks);
+router.get('/', getBooks);
 
 /* POST StoreBooks create /api/books */
 router.post('/', (req, res, next) => {
