@@ -1,7 +1,7 @@
-const readFromXmlFile = require('../repositories/inmemory');
+const inmemoryRepository = require('../repositories/inmemory');
 
-function getBooksFromMemory(req, res, next){
-    let booksData = readFromXmlFile.readBooksFromXmlFile();
+function getBooks(req, res, next){
+    let booksData = inmemoryRepository.readBooks();
     return booksData;
 }
-module.exports = {getBooksFromMemory};
+module.exports = {getBooks};
