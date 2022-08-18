@@ -19,7 +19,7 @@ function createBook(data){
         });
         newBookShelf.books.push(newBook);
     }
-    logger.endTask('addingBooks');
+    logger.endTask('mapping Books');
     return newBookShelf; 
 }
 
