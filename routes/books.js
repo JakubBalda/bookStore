@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getBooks } = require('../controllers/books');
-const { errorHandler } = require('../middleware/index');
+const { getBookDetails } = require('../controllers/books');
 
 /* GET GetlAllBooks /api/books */
 router.get('/', getBooks);
@@ -12,8 +12,6 @@ router.post('/', (req, res, next) => {
 });
 
 /* GET GetBook /api/books/:id  ()*/
-router.get('/:id', (req, res, next) => {
-    res.send('SHOW /api/books/:id');
-});
+router.get('/:id', getBookDetails);
 
 module.exports = router;
