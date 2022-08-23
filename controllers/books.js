@@ -1,15 +1,13 @@
-const getAllBooks = require('../services/getAllBooks');
-const getBook = require('../services/getBookDetails');
+const getAllBooksUseCase = require('../services/getAllBooksUseCase');
+const getBookUseCase = require('../services/getBookDetailsUseCase');
 
     async function getBooks(req, res, next){
-        let data = getAllBooks.getBooks();
-        // TODO:  getAllBooksUseCase.getBooks();
+        let data = getAllBooksUseCase.getBooks();
         res.send(data);
     }
 
     async function getBookDetails(req, res, next){
-        let selectedBook = getBook.getBookDetails(req.params.id);
-        // TODO: getBookUseCase;
+        let selectedBook = getBookUseCase.getBookDetails(req.params.id);
         res.send(selectedBook);
     }
 

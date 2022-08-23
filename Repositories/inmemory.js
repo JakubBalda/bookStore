@@ -6,20 +6,20 @@
     function readBooks(){
         loadData();
             
-        return mapper.createBook(booksArray);
+        return mapper.mapCollection(booksArray);
     }
 
     function readBookById(bookId){
         loadData();
 
-        
+        let book = booksArray[bookId-1];
 
-        return mapper.selectBook(bookId, booksArray);
+        return mapper.mapSingle(book);
     }
 
     function loadData(){
         if(booksArray === null || booksArray === undefined){
-            booksArray = parser.parseXml();
+            booksArray = parser.parseXml()[0];
         }
     }
 
