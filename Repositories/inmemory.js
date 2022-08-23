@@ -1,22 +1,25 @@
     const parser = require('../middleware/xmlParser');
     const logger = require('../middleware/logger');
     const mapper = require('../middleware/mapper');
-    var xmlData;
+    var booksArray;
     
     function readBooks(){
         loadData();
             
-        return mapper.createBook(xmlData);
+        return mapper.createBook(booksArray);
     }
 
     function readBookById(bookId){
         loadData();
-        return mapper.selectBook(bookId, xmlData);
+
+        
+
+        return mapper.selectBook(bookId, booksArray);
     }
 
     function loadData(){
-        if(xmlData === null || xmlData === undefined){
-            xmlData = parser.parseXml();
+        if(booksArray === null || booksArray === undefined){
+            booksArray = parser.parseXml();
         }
     }
 

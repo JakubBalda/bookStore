@@ -11,7 +11,9 @@ function parseXml(){
             books = result;
         })
 
-    return books;
+    let array = new Array(books.Books.Book);
+
+    return array;
 }
 
 module.exports.parseXml = parseXml;
