@@ -1,5 +1,5 @@
-const books = require('../models/books');
-const book = require('../models/book');
+const books = require('../models/domain/books');
+const book = require('../models/domain/book');
 const logger = require('../middleware/logger');
 
 
