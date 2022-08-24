@@ -5,14 +5,14 @@ const BooksSchema = new Schema({
     books: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Book'
+            ref: 'BookModel'
         }
     ]
 })
 
 
 
-module.exports = mongoose.model('Books', BooksSchema);
+module.exports = mongoose.model('BooksModel', BooksSchema);
 
 
 

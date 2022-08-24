@@ -1,12 +1,12 @@
-const books = require('../models/domain/books');
-const book = require('../models/domain/book');
+const booksModel = require('../models/domain/books');
+const bookModel = require('../models/domain/bookModel');
 const logger = require('../middleware/logger');
 const bookWebModel = require('../models/web/bookDTO');
 const booksWebModel = require('../models/web/booksDTO');
 
 
 function mapCollection(data){
-    let newBookShelf = new books();
+    let newBookShelf = new booksModel();
 
     for(let i=0; i<data.length; i++){
 
@@ -20,7 +20,7 @@ function mapCollection(data){
 
 function mapSingle(data){
 
-    let newBook = new book ({
+    let newBook = new bookModel ({
         id: Number(data.Id),
         author: String(data.Author),
         title: String(data.Title),
@@ -42,7 +42,7 @@ function mapToWebModel(data){
         
         booksDTO.books.push(newWebBook);
     }
-    return booksDTO.books;
+    return booksDTO;
 }
 
 function mapSingleToWebModel(data){
