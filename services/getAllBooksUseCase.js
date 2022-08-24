@@ -2,9 +2,9 @@ const repository = require('../repositories/inmemory');
 const booksMapper = require('../middleware/mapper');
 
 function getBooks(req, res, next){
-    let books = repository.readBooks();
+    let booksModel = repository.readBooks();
     
-    let booksDTO = booksMapper.mapToWebModel(books.books);
+    let booksDTO = booksMapper.mapToWebModel(booksModel.books);
     
     return booksDTO;
 }
