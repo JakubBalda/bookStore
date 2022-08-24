@@ -3,10 +3,15 @@
     const mapper = require('../middleware/mapper');
     var booksArray;
     
+    //TODO: logging
     function readBooks(){
+        logger.logInformation('readBooks from repository requested');
         loadData();
             
-        return mapper.mapCollection(booksArray);
+        let result =  mapper.mapCollection(booksArray);
+
+        logger.logData(result);
+        return result;
     }
 
     function readBookById(bookId){
@@ -18,9 +23,13 @@
     }
 
     function loadData(){
+        logger.startTask('loadData');
+
         if(booksArray === null || booksArray === undefined){
             booksArray = parser.parseXml()[0];
         }
+
+        logger.endTask('loadData');
     }
 
 module.exports = {readBooks, readBookById};
