@@ -6,10 +6,11 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
+const database = require('./databaseConnection');
 
 // require routes
 const indexRouter = require('./routes/index');
-const booksRouter = require('./routes/books');
+const booksRouter = require('./routes/booksRouter');
 
 
 const app = express();
@@ -23,6 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Database connection
+// database.connectToDb();
 
 //Mount routes
 app.use('/', indexRouter);

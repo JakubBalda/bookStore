@@ -15,11 +15,14 @@
     }
 
     function readBookById(bookId){
+        logger.logInformation('readBookById from repository requested');
         loadData();
 
         let book = booksArray[bookId-1];
+        let bookWithDetails = mapper.mapSingle(book);;
 
-        return mapper.mapSingle(book);
+        logger.logData(bookWithDetails);
+        return bookWithDetails;
     }
 
     function loadData(){
