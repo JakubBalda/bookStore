@@ -1,8 +1,7 @@
-//TODO: booksRouter;
 const express = require('express');
 const router = express.Router();
-const { getBooks } = require('../controllers/books');
-const { getBookDetails } = require('../controllers/books');
+const { getBooks } = require('../controllers/booksController');
+const { getBookDetails } = require('../controllers/booksController');
 
 /* GET GetlAllBooks /api/books */
 router.get('/', getBooks);
