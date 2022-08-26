@@ -1,12 +1,15 @@
 const getAllBooksUseCase = require('../services/getAllBooksUseCase');
 const getBookUseCase = require('../services/getBookDetailsUseCase');
 const logger = require('../middleware/logger');
+const db = require('../database');
 
 
     async function getBooks(req, res, next){
         logRequest('getBooks',req);
         
-        let data = getAllBooksUseCase.getBooks();
+        //let data = getAllBooksUseCase.getBooks();
+
+        let data = await db.sqlQuery('SELECT * FROM books');
         res.send(data);
     }
 

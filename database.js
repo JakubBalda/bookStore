@@ -1,10 +1,11 @@
 const mysql = require('mysql');
+const util = require('util');
 
 let databaseConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'bookStore'
+    database: 'test'
 });
 
 async function sqlQuery(query){
