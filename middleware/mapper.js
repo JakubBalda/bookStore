@@ -1,8 +1,8 @@
 const booksModel = require('../models/domain/books');
 const bookModel = require('../models/domain/bookModel');
 const logger = require('../middleware/logger');
-const bookWebModel = require('../models/web/bookDTO');
-const booksWebModel = require('../models/web/booksDTO');
+const bookWebModel = require('../models/web/getBooksModels/bookDTO');
+const booksWebModel = require('../models/web/getBooksModels/booksDTO');
 
 
 function mapCollection(data){

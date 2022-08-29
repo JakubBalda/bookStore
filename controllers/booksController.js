@@ -1,5 +1,6 @@
 const getAllBooksUseCase = require('../services/getAllBooksUseCase');
 const getBookUseCase = require('../services/getBookDetailsUseCase');
+const storeNewBookUseCase = require('../services/storeNewBookUseCase');
 const logger = require('../middleware/logger');
 const db = require('../database');
 
@@ -7,23 +8,24 @@ const db = require('../database');
     async function getBooks(req, res, next){
         logRequest('getBooks',req);
         
-        //let data = getAllBooksUseCase.getBooks();
+        let data = getAllBooksUseCase.getBooks();
 
-        let data = await db.sqlQuery('SELECT * FROM books');
         res.send(data);
     }
 
     async function getBookDetails(req, res, next){
         logRequest('getBookDetails',req);
-
-        let selectedBook = getBookUseCase.getBookDetails(req.params.id);
+        
+        let selectedBook = await getBookUseCase.getBookDetails(req.params.id);
         res.send(selectedBook);
     }
 
-    
+    function storeNewBook(){
+
+    }
 
 
-module.exports = {getBooks, getBookDetails};
+module.exports = {getBooks, getBookDetails, storeNewBook};
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);

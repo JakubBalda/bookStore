@@ -5,7 +5,7 @@ let databaseConnection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'test'
+    database: 'bookStore'
 });
 
 async function sqlQuery(query){

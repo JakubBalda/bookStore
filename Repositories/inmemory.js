@@ -3,7 +3,6 @@ const logger = require('../middleware/logger');
 const mapper = require('../middleware/mapper');
 var booksArray;
 
-//TODO: logging
 function readBooks(){
     logger.logInformation('readBooks from repository requested');
     loadData();
