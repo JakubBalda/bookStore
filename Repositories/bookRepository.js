@@ -1,4 +1,4 @@
-//TODO: addNewBook(), getBookById()
+//TODO: addNewBook()
 const mapper = require('../middleware/mapper');
 const logger = require('../middleware/logger');
 const database = require('../database');

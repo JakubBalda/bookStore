@@ -1,4 +1,4 @@
-//TODO: addNewAuthor(), getAuthorById()
+//TODO: addNewAuthor()
 const mapper = require('../middleware/mapper');
 const logger = require('../middleware/logger');
 const database = require('../database');
