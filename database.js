@@ -8,20 +8,21 @@ let databaseConnection = mysql.createConnection({
     database: 'bookStore'
 });
 
+let databasePool = mysql.createPool({
+    connectionLimit: 50,
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'bookStore'
+})
+
 async function sqlQuery(query){
     
-    databaseConnection.connect((err) => {
-        if(err) throw err;  
-        console.log("Connected successfuly!");
-    });
-
-    let data;
-    
-    const queryExecute = util.promisify(databaseConnection.query).bind(databaseConnection);
+        
+    const queryExecute = util.promisify(databasePool.query).bind(databasePool);
 
     data = await queryExecute(query);
-
-    databaseConnection.end();
+    
     return data;
 }
 

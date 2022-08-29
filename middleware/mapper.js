@@ -58,4 +58,17 @@ function mapSingleToWebModel(data){
     return newBook; 
 }
 
-module.exports = {mapCollection, mapSingle, mapToWebModel};
+function mapSingleFromDbToWebModel(book, author){
+
+    let newBook = new bookWebModel ({
+        id: Number(book.ID),
+        author: String(`${author.Name} ${author.Surname}`),
+        title: String(book.Title),
+        price: Number(book.Price),
+        amount: Number(book.Amount),
+    });
+
+    return newBook;
+}
+
+module.exports = {mapCollection, mapSingle, mapToWebModel, mapSingleFromDbToWebModel};
