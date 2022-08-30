@@ -3,8 +3,8 @@ const mapper = require('../middleware/mapper');
 const logger = require('../middleware/logger');
 const database = require('../database');
 
-function addNewBook(newBook){
-
+function addNewBook(newBook, authorId){
+    mapper.mapBookToStore(newBook, authorId);
 }
 
 function getBookById(bookId){

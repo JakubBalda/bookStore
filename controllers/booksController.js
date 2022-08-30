@@ -6,7 +6,7 @@ const db = require('../database');
 
 
     async function getBooks(req, res, next){
-        logRequest('getBooks',req);
+        logRequest('getBooks', req);
         
         let data = getAllBooksUseCase.getBooks();
 
@@ -14,14 +14,18 @@ const db = require('../database');
     }
 
     async function getBookDetails(req, res, next){
-        logRequest('getBookDetails',req);
+        logRequest('getBookDetails', req);
         
         let selectedBook = await getBookUseCase.getBookDetails(req.params.id);
         res.send(selectedBook);
     }
 
-    function storeNewBook(){
+    function storeNewBook(req, res, next){
+        logRequest('storeNewBook', req);
+        console.log(req.params.authorName)
 
+        //let authorId = storeNewBookUseCase.addNewAuthor(req.params.authorName, req.params.authorSurname);
+        //storeNewBookUseCase.addNewBook(req.params, authorId);
     }
 
 

@@ -1,12 +1,11 @@
-const repository = require('../repositories/inmemory');
-const bookRepository = require('../repositories/bookRepository')
+const bookRepository = require('../repositories/booksRepository')
 const authorsRepository = require('../repositories/authorsRepository')
 const logger = require('../middleware/logger');
 const mapper = require('../middleware/mapper');
 
 async function getBookDetails(id){
     logger.logInformation('getBookDetailsCase.getBooksDetails requested');
-    //let bookDetails = repository.readBookById(id);
+    
     let bookDetails = await bookRepository.getBookById(id);
     let authorId = bookDetails[0].AuthorID; 
     
