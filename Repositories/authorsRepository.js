@@ -11,24 +11,24 @@ function getAuthorById(authorId){
     return author;
 }
 
-function addNewAuthor(authorName, authorSurname){
-    authorId = findAuthor(authorName, authorSurname);
+async function addNewAuthor(authorName, authorSurname){
+    authorId = await findAuthor(authorName, authorSurname);
 
-    if(authorId === undefined){
+    if(authorId[0] === undefined){
         let query = `INSERT INTO authors (name, surname) VALUES ('${authorName}', '${authorSurname}')`;
 
-        database.sqlQuery(query);
-        authorId = findAuthor(authorName, authorSurname);
+        await database.sqlQuery(query);
+        authorId = await findAuthor(authorName, authorSurname);
     }
 
     return authorId;
 }
 
-function findAuthor(authorName, authorSurname){
-    let query = `SELECT id FROM authors WHERE name = '${authorName}' AND surname = '${authorSurname}'`;
+async function findAuthor(authorName, authorSurname){
+    let query = `SELECT ID FROM authors WHERE name = '${authorName}' AND surname = '${authorSurname}'`;
 
-    let authorId = database.sqlQuery(query);
-    logger.logData(authorId);
+    let authorId = await database.sqlQuery(query);
+    logger.logData(authorId[0]);
     return authorId;
 }
 

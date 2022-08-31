@@ -75,7 +75,7 @@ function mapSingleFromDbToWebModel(book, author){
 
 function mapBookToStore(book, authorId){
     let newBook = new storeBookModel({
-        author: Number(authorId[0].id),
+        author: Number(authorId[0].ID),
         title: String(book.title),
         price: Number(book.price),
         amount: Number(book.amount),

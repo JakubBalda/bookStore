@@ -25,6 +25,7 @@ const db = require('../database');
         console.log(req.query.authorName)
 
         let authorId = await storeNewBookUseCase.addNewAuthor(req.query.authorName, req.query.authorSurname);
+        console.log(authorId);
         storeNewBookUseCase.addNewBook(req.query, authorId);
         res.send(authorId);
     }
