@@ -20,12 +20,13 @@ const db = require('../database');
         res.send(selectedBook);
     }
 
-    function storeNewBook(req, res, next){
+    async function storeNewBook(req, res, next){
         logRequest('storeNewBook', req);
-        console.log(req.params.authorName)
+        console.log(req.query.authorName)
 
-        //let authorId = storeNewBookUseCase.addNewAuthor(req.params.authorName, req.params.authorSurname);
-        //storeNewBookUseCase.addNewBook(req.params, authorId);
+        let authorId = await storeNewBookUseCase.addNewAuthor(req.query.authorName, req.query.authorSurname);
+        storeNewBookUseCase.addNewBook(req.query, authorId);
+        res.send(authorId);
     }
 
 

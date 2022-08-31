@@ -11,7 +11,7 @@ function addNewAuthor(authorName, authorSurname){
 }
 
 function addNewBook(requestedParams, authorId){
-    bookRepository.addNewBook(requestedParams, authorId);
+    booksRepository.addNewBook(requestedParams, authorId);
 }
 
-module.export = {addNewAuthor, addNewBook};
+module.exports = {addNewAuthor, addNewBook};

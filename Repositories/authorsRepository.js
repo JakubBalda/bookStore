@@ -15,7 +15,7 @@ function addNewAuthor(authorName, authorSurname){
     authorId = findAuthor(authorName, authorSurname);
 
     if(authorId === undefined){
-        let query = `INSERT INTO authors (name, surname) VALUES (${authorName}, ${authorSurname})`;
+        let query = `INSERT INTO authors (name, surname) VALUES ('${authorName}', '${authorSurname}')`;
 
         database.sqlQuery(query);
         authorId = findAuthor(authorName, authorSurname);
@@ -25,7 +25,7 @@ function addNewAuthor(authorName, authorSurname){
 }
 
 function findAuthor(authorName, authorSurname){
-    let query = `SELECT id FROM authors WHERE name = ${authorName} AND surname = ${authorSurname}`;
+    let query = `SELECT id FROM authors WHERE name = '${authorName}' AND surname = '${authorSurname}'`;
 
     let authorId = database.sqlQuery(query);
     logger.logData(authorId);
