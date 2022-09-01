@@ -1,6 +1,6 @@
 const parser = require('../middleware/xmlParser');
 const logger = require('../middleware/logger');
-const mapper = require('../middleware/mapper');
+const mapper = require('../middleware/booksMapper');
 var booksArray;
 
 function readBooks(){

@@ -1,4 +1,4 @@
-const mapper = require('../middleware/mapper');
+const mapper = require('../middleware/booksMapper');
 const logger = require('../middleware/logger');
 const database = require('../database');
 
@@ -24,12 +24,12 @@ async function addNewAuthor(authorName, authorSurname){
     return authorId;
 }
 
-async function findAuthor(authorName, authorSurname){
-    let query = `SELECT ID FROM authors WHERE name = '${authorName}' AND surname = '${authorSurname}'`;
+async function findAuthorByName(author){
+    let query = `SELECT ID FROM authors WHERE name = '${author.name}' AND surname = '${author.surname}'`;
 
     let authorId = await database.sqlQuery(query);
     logger.logData(authorId[0]);
     return authorId;
 }
 
-module.exports = {getAuthorById, addNewAuthor};
+module.exports = {getAuthorById, addNewAuthor, findAuthorByName};

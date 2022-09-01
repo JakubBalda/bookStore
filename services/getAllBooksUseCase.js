@@ -1,5 +1,5 @@
 const repository = require('../repositories/inmemory');
-const booksMapper = require('../middleware/mapper');
+const booksMapper = require('../middleware/booksMapper');
 const logger = require('../middleware/logger');
 
 function getBooks(req, res, next){

@@ -2,8 +2,8 @@ const getAllBooksUseCase = require('../services/getAllBooksUseCase');
 const getBookUseCase = require('../services/getBookDetailsUseCase');
 const storeNewBookUseCase = require('../services/storeNewBookUseCase');
 const logger = require('../middleware/logger');
-const db = require('../database');
-
+const booksMapper = require('../middleware/booksMapper');
+const authorsMapper = require('../middleware/authorsMapper');
 
     async function getBooks(req, res, next){
         logRequest('getBooks', req);
@@ -22,12 +22,11 @@ const db = require('../database');
 
     async function storeNewBook(req, res, next){
         logRequest('storeNewBook', req);
-        console.log(req.query.authorName)
+        
+        let author = authorsMapper.mapRequestToAuthorToStoreModel(req.query);
+        let book = booksMapper.mapRequestToBookToStoreModel(req.query);
 
-        let authorId = await storeNewBookUseCase.addNewAuthor(req.query.authorName, req.query.authorSurname);
-        console.log(authorId);
-        storeNewBookUseCase.addNewBook(req.query, authorId);
-        res.send(authorId);
+        storeNewBookUseCase.storeNewBook(author, book);
     }
 
 

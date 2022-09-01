@@ -1,10 +1,8 @@
 const booksModel = require('../models/domain/books');
 const bookModel = require('../models/domain/bookModel');
-const logger = require('../middleware/logger');
 const bookWebModel = require('../models/web/getBooksModels/bookDTO');
 const booksWebModel = require('../models/web/getBooksModels/booksDTO');
 const storeBookModel = require('../models/web/storeBooksModels/bookModel')
-const storeAuthorModel = require('../models/web/storeBooksModels/authorModel')
 
 
 function mapCollection(data){
@@ -73,18 +71,18 @@ function mapSingleFromDbToWebModel(book, author){
     return newBook;
 }
 
-function mapBookToStore(book, authorId){
+function mapRequestToBookToStoreModel(request, authorId){
     let newBook = new storeBookModel({
-        author: Number(authorId[0].ID),
-        title: String(book.title),
-        price: Number(book.price),
-        amount: Number(book.amount),
-        imageUrl: String(book.imageUrl),
-        isbn: String(book.isbn),
-        description: String(book.description)
+        author: Number(authorId),
+        title: String(request.title),
+        price: Number(request.price),
+        amount: Number(request.amount),
+        imageUrl: String(request.imageUrl),
+        isbn: String(request.isbn),
+        description: String(request.description)
     })
 
     return newBook;
 }
 
-module.exports = {mapCollection, mapSingle, mapToWebModel, mapSingleFromDbToWebModel, mapBookToStore};
+module.exports = {mapCollection, mapSingle, mapToWebModel, mapSingleFromDbToWebModel, mapRequestToBookToStoreModel};

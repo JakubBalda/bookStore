@@ -1,7 +1,7 @@
 const bookRepository = require('../repositories/booksRepository')
 const authorsRepository = require('../repositories/authorsRepository')
 const logger = require('../middleware/logger');
-const mapper = require('../middleware/mapper');
+const mapper = require('../middleware/booksMapper');
 
 async function getBookDetails(id){
     logger.logInformation('getBookDetailsCase.getBooksDetails requested');

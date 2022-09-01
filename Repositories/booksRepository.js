@@ -1,21 +1,13 @@
-const mapper = require('../middleware/mapper');
 const logger = require('../middleware/logger');
 const database = require('../database');
 
-function addNewBook(newBook, authorId){
-    bookToStore = mapper.mapBookToStore(newBook, authorId);
+function addNewBook(bookToStore){
+    let query = `INSERT INTO books (Title, AuthorID, ISBN, Description, ImageURL, Price, Amount) 
+                    VALUES ('${bookToStore.title}', ${bookToStore.author}, '${bookToStore.isbn}',
+                    '${bookToStore.description}',  '${bookToStore.imageUrl}',  ${bookToStore.price},
+                    ${bookToStore.amount})`;
 
-    if(findBook(bookToStore.isbn) === false){
-        let query = `INSERT INTO books (Title, AuthorID, ISBN, Description, ImageURL, Price, Amount) 
-                        VALUES ('${bookToStore.title}', ${bookToStore.author}, '${bookToStore.isbn}',
-                        '${bookToStore.description}',  '${bookToStore.imageUrl}',  ${bookToStore.price},
-                        ${bookToStore.amount})`;
-
-        database.sqlQuery(query);
-    }else{
-        logger.logInformation("Książka już istnieje");
-    }
-    
+    database.sqlQuery(query);
 }
 
 function getBookById(bookId){
@@ -26,14 +18,12 @@ function getBookById(bookId){
     return bookDetails;
 }
 
-async function findBook(isbn){
+async function findBookByIsbn(isbn){
     let query = `SELECT ID FROM books WHERE ISBN = '${isbn}'`;
 
-    let ID = await database.sqlQuery(query);
+    let id = await database.sqlQuery(query);
 
-    if(ID[0] === undefined) 
-        return true;
-    return false;
+    return id;
 }
 
-module.exports = {getBookById, addNewBook};
+module.exports = {getBookById, addNewBook, findBookByIsbn};
