@@ -11,14 +11,14 @@ function getAuthorById(authorId){
     return author;
 }
 
-async function addNewAuthor(authorName, authorSurname){
-    authorId = await findAuthor(authorName, authorSurname);
+async function addNewAuthor(author){
+    authorId = await findAuthorByName(author);
 
     if(authorId[0] === undefined){
-        let query = `INSERT INTO authors (name, surname) VALUES ('${authorName}', '${authorSurname}')`;
+        let query = `INSERT INTO authors (name, surname) VALUES ('${author.name}', '${author.surname}')`;
 
         await database.sqlQuery(query);
-        authorId = await findAuthor(authorName, authorSurname);
+        authorId = await findAuthorByName(author);
     }
 
     return authorId;

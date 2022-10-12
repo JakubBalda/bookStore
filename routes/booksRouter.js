@@ -7,7 +7,7 @@ const { storeNewBook } = require('../controllers/booksController');
 /* GET GetlAllBooks /api/books */
 router.get('/', getBooks);
 
-/* POST StoreBook api/books.new */
+/* POST StoreBook api/books/new */
 router.post('/new', storeNewBook);
 
 /* GET GetBook /api/books/:id */

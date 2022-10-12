@@ -6,7 +6,7 @@ const authorModel = require('../models/domain/authorModel');
 
 async function addNewAuthor(newAuthor){
     logger.logRequest('addNewAuthor requested');
-    authorId = await authorsRepository.addNewAuthor(newAuthor.name, newAuthor.surname);
+    authorId = await authorsRepository.addNewAuthor(newAuthor);
 
     return authorId;
 }
