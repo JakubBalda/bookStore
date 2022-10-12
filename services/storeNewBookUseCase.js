@@ -34,7 +34,7 @@ async function storeNewBook(author, book){
     if(!isAuthorInStore(author)){
         authorId = await addNewAuthor(author);
     }else{
-        logger.logInformation('Podany autor już istnieje, wsyzukuje w bazie danych');
+        logger.logInformation('Podany autor już istnieje, wyszukuje w bazie danych');
         authorId = await authorsRepository.findAuthorByName(author);
     }
 

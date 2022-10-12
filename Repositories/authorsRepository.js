@@ -4,7 +4,7 @@ const database = require('../database');
 
 function getAuthorById(authorId){
     logger.logInformation('getAuthorById requested');
-    let query = `SELECT * FROM authors WHERE ID = ${authorId}`;
+    let query = `SELECT ID, Name, Surname FROM authors WHERE ID = ${authorId}`;
 
     let author = database.sqlQuery(query);
     logger.logData(author);
