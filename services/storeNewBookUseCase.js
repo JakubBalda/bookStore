@@ -16,7 +16,7 @@ function addNewBook(newBook, authorId){
 }
 
 async function isBookInStore(isbn){
-    let id = await booksRepository.findBookByIsbn(isbn);
+    let id = await booksRepository.findBookIdByIsbn(isbn);
     logger.logData(id[0]);
     
     return id[0] === undefined;

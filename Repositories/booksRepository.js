@@ -18,7 +18,7 @@ function getBookById(bookId){
     return bookDetails;
 }
 
-async function findBookByIsbn(isbn){
+async function findBookIdByIsbn(isbn){
     let query = `SELECT ID FROM books WHERE ISBN = '${isbn}'`;
 
     let id = await database.sqlQuery(query);
@@ -26,4 +26,4 @@ async function findBookByIsbn(isbn){
     return id;
 }
 
-module.exports = {getBookById, addNewBook, findBookByIsbn};
+module.exports = {getBookById, addNewBook, findBookIdByIsbn};
