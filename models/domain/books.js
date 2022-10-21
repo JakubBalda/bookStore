@@ -10,8 +10,6 @@ const BooksSchema = new Schema({
     ]
 })
 
-
-
 module.exports = mongoose.model('BooksModel', BooksSchema);
 
 

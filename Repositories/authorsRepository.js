@@ -2,6 +2,10 @@ const mapper = require('../middleware/booksMapper');
 const logger = require('../middleware/logger');
 const database = require('../database');
 
+function authorExists(authorId){
+    return authorId === undefined;
+}
+
 function getAuthorById(authorId){
     logger.logInformation('getAuthorById requested');
     let query = `SELECT ID, Name, Surname FROM authors WHERE ID = ${authorId}`;
@@ -14,7 +18,7 @@ function getAuthorById(authorId){
 async function addNewAuthor(author){
     authorId = await findAuthorByName(author);
 
-    if(authorId[0] === undefined){
+    if(authorExists(authorId[0])){
         let query = `INSERT INTO authors (name, surname) VALUES ('${author.name}', '${author.surname}')`;
 
         await database.sqlQuery(query);
