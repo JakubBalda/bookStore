@@ -10,7 +10,7 @@ function addNewBook(bookToStore){
     database.sqlQuery(query);
 }
 
-function getBookById(bookId){
+function getBookDetailsById(bookId){
     let query = `SELECT ID, AuthorID, Title, Price, Amount FROM Books WHERE ID = ${bookId}`;
 
     let bookDetails = database.sqlQuery(query);
@@ -26,4 +26,4 @@ async function findBookIdByIsbn(isbn){
     return id;
 }
 
-module.exports = {getBookById, addNewBook, findBookIdByIsbn};
+module.exports = {getBookDetailsById, addNewBook, findBookIdByIsbn};

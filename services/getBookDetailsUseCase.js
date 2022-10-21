@@ -6,7 +6,7 @@ const mapper = require('../middleware/booksMapper');
 async function getBookDetails(id){
     logger.logInformation('getBookDetailsCase.getBooksDetails requested');
     
-    let bookDetails = await bookRepository.getBookById(id);
+    let bookDetails = await bookRepository.getBookDetailsById(id);
 
     if(bookDetails[0] != undefined){
         let authorId = bookDetails[0].AuthorID; 
