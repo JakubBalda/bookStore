@@ -1,16 +1,8 @@
-const mysql = require('mysql');
 const util = require('util');
-
-let databasePool = mysql.createPool({
-    connectionLimit: 5,
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'bookStore'
-})
+const dbConfig = require('../bookStore/databaseConfig'); // samo databaseConfig w nawiasie nie działa
 
 async function sqlQuery(query){
-    const queryExecute = util.promisify(databasePool.query).bind(databasePool);
+    const queryExecute = util.promisify(dbConfig.databasePool.query).bind(dbConfig.databasePool);
 
     data = await queryExecute(query);
     
