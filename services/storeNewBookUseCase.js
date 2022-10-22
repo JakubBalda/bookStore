@@ -3,6 +3,8 @@ const logger = require('../middleware/logger');
 const booksRepository = require('../repositories/booksRepository');
 const authorsRepository = require('../repositories/authorsRepository');
 const authorModel = require('../models/domain/authorModel');
+const booleanFunctions = require('../utils/booleanFunctions');
+
 
 async function addNewAuthor(newAuthor){
     logger.logRequest('addNewAuthor requested');
@@ -19,13 +21,13 @@ async function isBookInStore(isbn){
     let id = await booksRepository.findBookIdByIsbn(isbn);
     logger.logData(id[0]);
     
-    return id[0] === undefined;
+    return booleanFunctions.isNullOrUndefined(id[0]);
 }
 
 async function isAuthorInStore(author){
     let id = await authorsRepository.findAuthorByName(author);
     
-    return id[0] === undefined;
+    return booleanFunctions.isNullOrUndefined(id[0]);
 }
 
 async function storeNewBook(author, book){

@@ -1,9 +1,10 @@
 const mapper = require('../middleware/booksMapper');
 const logger = require('../middleware/logger');
 const database = require('../database');
+const booleanFunctions = require('../utils/booleanFunctions');
 
 function authorExists(authorId){
-    return authorId === undefined;
+    return booleanFunctions.isNullOrUndefined(authorId);
 }
 
 function getAuthorById(authorId){

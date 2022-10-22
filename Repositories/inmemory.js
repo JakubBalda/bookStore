@@ -1,6 +1,7 @@
 const parser = require('../middleware/xmlParser');
 const logger = require('../middleware/logger');
 const mapper = require('../middleware/booksMapper');
+const booleanFunctions = require('../utils/booleanFunctions');
 var booksArray;
 
 function readBooks(){
@@ -18,7 +19,7 @@ function readBookById(bookId){
     loadData();
 
     let book = booksArray[bookId-1];
-    let bookWithDetails = mapper.mapSingle(book);;
+    let bookWithDetails = mapper.mapSingle(book);
 
     logger.logData(bookWithDetails);
     return bookWithDetails;
@@ -27,7 +28,7 @@ function readBookById(bookId){
 function loadData(){
     logger.startTask('loadData');
 
-    if(booksArray === null || booksArray === undefined){
+    if(booleanFunctions.isNullOrUndefined(booksArray)){
         booksArray = parser.parseXml()[0];
     }
 
