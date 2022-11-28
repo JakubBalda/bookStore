@@ -14,7 +14,11 @@ async function addNewAuthor(newAuthor){
 }
 
 function addNewBook(newBook, authorId){
-    booksRepository.addNewBook(newBook, authorId);
+    if(booksRepository.addNewBook(newBook, authorId)){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 async function isBookInStore(isbn){
@@ -43,11 +47,19 @@ async function storeNewBook(author, book){
     bookToStore =  mapper.mapRequestToBookToStoreModel(book, authorId[0].ID);
 
     if(await isBookInStore(bookToStore.isbn)){
-        addNewBook(bookToStore);
-        logger.logInformation("Książka została dodana");
+        if(addNewBook(bookToStore)){
+            logger.logInformation("Książka została dodana");
 
+            return "Książka została dodana";
+        }else{
+            logger.logInformation("Wystąpił błąd, książka nie została dodana");
+
+            return "Wystąpił błąd, książka nie została dodana";
+        }
     }else{
         logger.logInformation("Książka już istnieje");
+
+        return "Książka już istnieje";
     }
 }
 

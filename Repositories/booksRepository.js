@@ -7,7 +7,11 @@ function addNewBook(bookToStore){
                     '${bookToStore.description}',  '${bookToStore.imageUrl}',  ${bookToStore.price},
                     ${bookToStore.amount})`;
 
-    database.sqlQuery(query);
+    if(database.sqlQuery(query)){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 function getBookDetailsById(bookId){

@@ -4,7 +4,7 @@ const database = require('../database');
 const booleanFunctions = require('../utils/booleanFunctions');
 
 function authorExists(authorId){
-    return booleanFunctions.isNullOrUndefined(authorId);
+    return !booleanFunctions.isNullOrUndefined(authorId);
 }
 
 function getAuthorById(authorId){

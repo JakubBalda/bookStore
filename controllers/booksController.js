@@ -26,7 +26,9 @@ const authorsMapper = require('../middleware/authorsMapper');
         let author = authorsMapper.mapRequestToAuthorToStoreModel(req.query);
         let book = booksMapper.mapRequestToBookToStoreModel(req.query);
 
-        storeNewBookUseCase.storeNewBook(author, book);
+        let information = await storeNewBookUseCase.storeNewBook(author, book);
+
+        res.send(information);
     }
 
 
