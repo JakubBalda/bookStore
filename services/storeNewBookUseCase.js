@@ -4,6 +4,7 @@ const booksRepository = require('../repositories/booksRepository');
 const authorsRepository = require('../repositories/authorsRepository');
 const authorModel = require('../models/domain/authorModel');
 const booleanFunctions = require('../utils/booleanFunctions');
+const validate = require('../utils/dataValidator'); 
 
 
 async function addNewAuthor(newAuthor){
@@ -37,7 +38,9 @@ async function isAuthorInStore(author){
 async function storeNewBook(author, book){
     let authorId;
 
-    if(!isAuthorInStore(author)){
+    if(!validate.validateAuthor(author)){
+        return "Wystąpił błąd;"
+    }else if(!isAuthorInStore(author)){
         authorId = await addNewAuthor(author);
     }else{
         logger.logInformation('Podany autor już istnieje, wyszukuje w bazie danych');
@@ -47,7 +50,7 @@ async function storeNewBook(author, book){
     bookToStore =  mapper.mapRequestToBookToStoreModel(book, authorId[0].ID);
 
     if(await isBookInStore(bookToStore.isbn)){
-        if(addNewBook(bookToStore)){
+        if(addNewBook(bookToStore) && validate.validateBook(bookToStore)){
             logger.logInformation("Książka została dodana");
 
             return "Książka została dodana";
