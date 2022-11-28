@@ -1,8 +1,25 @@
 const logger = require('../middleware/logger');
-const validator = require('validator');
 
 function validateBook(bookToStore){
-    if(!validator.isEmpty(bookToStore)){
+    if(bookToStore !== undefined){
+        if(bookToStore.title === undefined)
+            return false;
+
+        if(bookToStore.isbn === undefined)
+            return false;
+
+        if(bookToStore.description === undefined)
+            return false;
+
+        if(bookToStore.imgURL === undefined)
+            return false;
+        
+        if(bookToStore.price === undefined)
+            return false;
+
+        if(bookToStore.amount === undefined)
+            return false;
+
         return true;
     }
     return false;

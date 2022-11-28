@@ -50,7 +50,7 @@ async function storeNewBook(author, book){
     bookToStore =  mapper.mapRequestToBookToStoreModel(book, authorId[0].ID);
 
     if(await isBookInStore(bookToStore.isbn)){
-        if(addNewBook(bookToStore) && validate.validateBook(bookToStore)){
+        if(validate.validateBook(bookToStore) && addNewBook(bookToStore)){
             logger.logInformation("Książka została dodana");
 
             return "Książka została dodana";
