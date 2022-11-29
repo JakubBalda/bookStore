@@ -12,4 +12,4 @@ const BookSchema = new Schema({
     description: {type: String, maxLength: [200, 'Description must have less than 200 signsx']},
 })
 
-module.exports = mongoose.model('Book', BookSchema);
+module.exports = mongoose.model('BookModel', BookSchema);

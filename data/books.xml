@@ -32,7 +32,7 @@
 		<Title>ASP.NET Web API 2, 2nd Edition</Title>
 		<Isbn>978-1-484201-10-7</Isbn>
 		<Price>112</Price>
-		<Amount>215</Amount>
+		<Amount>0</Amount>
 		<ImageName>asp.net_web_api_2_2nd_edition.jpg</ImageName>
 		<Description>
 			The ASP.NET MVC Framework has always been a good platform on which to implement REST-based services, but the introduction of the ASP.NET Web API Framework raised the bar to a whole new level.
