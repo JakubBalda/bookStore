@@ -16,6 +16,12 @@ describe('booleanFunctions.js tests', ()=>{
             expect(result).to.be.true;
         });
 
+        it('should be true', () =>{
+            let testObject;
+            const result = booleanFunctions.isNullOrUndefined(testObject);
+            expect(result).to.be.true;
+        });
+
         it('should be false', () =>{
             let testObject = "null";
             const result = booleanFunctions.isNullOrUndefined(testObject);
