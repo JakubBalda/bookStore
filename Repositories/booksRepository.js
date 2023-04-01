@@ -14,8 +14,8 @@ function addNewBook(bookToStore){
     }
 }
 
-function getBookDetailsById(bookId){
-    let query = `SELECT ID, AuthorID, Title, Price, Amount FROM Books WHERE ID = ${bookId}`;
+function getBookDetailsById(bookID){
+    let query = `SELECT ID, AuthorID, Title, Price, Amount FROM Books WHERE ID = ${bookID}`;
 
     let bookDetails = database.sqlQuery(query);
     logger.logData(bookDetails);
@@ -30,4 +30,15 @@ async function findBookIdByIsbn(isbn){
     return id;
 }
 
-module.exports = {getBookDetailsById, addNewBook, findBookIdByIsbn};
+function deleteBookById(bookID){
+    let query = `DELETE FROM books WHERE ID = '${bookID}'`;
+
+    if(database.sqlQuery(query)){
+        return true;
+    }else{
+        return false;
+    }
+ 
+}
+
+module.exports = {getBookDetailsById, addNewBook, findBookIdByIsbn, deleteBookById};
