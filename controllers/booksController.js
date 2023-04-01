@@ -2,6 +2,7 @@ const getAllBooksUseCase = require('../services/getAllBooksUseCase');
 const getBookUseCase = require('../services/getBookDetailsUseCase');
 const storeNewBookUseCase = require('../services/storeNewBookUseCase');
 const deleteBookUseCase = require('../services/deleteBookUseCase');
+const updateDetails = require('../services/updateBookDetailsUseCase');
 const logger = require('../middleware/logger');
 const booksMapper = require('../middleware/booksMapper');
 const authorsMapper = require('../middleware/authorsMapper');
@@ -42,12 +43,12 @@ const authorsMapper = require('../middleware/authorsMapper');
 
     async function updateBookDetails(req, res, next){
         logRequest('updateBookDetails', req);
-        
+        await updateDetails.updateDetails();
         res.send("Dane zaktualizowane!");
     }
 
 
-module.exports = {getBooks, getBookDetails, storeNewBook, deleteBook};
+module.exports = {getBooks, getBookDetails, storeNewBook, deleteBook, updateBookDetails};
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);
