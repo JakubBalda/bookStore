@@ -41,4 +41,17 @@ function deleteBookById(bookID){
  
 }
 
-module.exports = {getBookDetailsById, addNewBook, findBookIdByIsbn, deleteBookById};
+function updateBook(book){
+    let query = `UPDATE books SET Title = '${book.title}', AuthorID = '${book.author}', 
+                    ISBN = '${book.isbn}', Description = '${book.description}', 
+                    ImageURL = '${book.imageUrl}', Price = '${book.price}', Amount = '${book.amount}'
+                    WHERE ID = '${book.id}'`;
+    
+    if(database.sqlQuery(query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+module.exports = {getBookDetailsById, addNewBook, findBookIdByIsbn, deleteBookById, updateBook};

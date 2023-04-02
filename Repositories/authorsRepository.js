@@ -37,4 +37,14 @@ async function findAuthorByName(author){
     return authorId;
 }
 
-module.exports = {getAuthorById, addNewAuthor, findAuthorByName};
+async function updateAuthor(author){
+    let query = `UPDATE authors SET name = '${author.name}', surname = '${author.surname} WHERE ID = '${author.id}'`;
+
+    if(await databse.sqlQuery(query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+module.exports = {getAuthorById, addNewAuthor, findAuthorByName, updateAuthor};

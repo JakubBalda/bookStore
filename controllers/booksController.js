@@ -43,7 +43,12 @@ const authorsMapper = require('../middleware/authorsMapper');
 
     async function updateBookDetails(req, res, next){
         logRequest('updateBookDetails', req);
-        await updateDetails.updateDetails();
+
+        let author = authorsMapper.mapRequestToAuthorToStoreModel(req.query);
+        let book = booksMapper.mapRequestToBookToStoreModel(req.query);
+
+        await updateDetails.updateDetails(author, book);
+
         res.send("Dane zaktualizowane!");
     }
 

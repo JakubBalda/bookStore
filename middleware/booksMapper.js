@@ -3,6 +3,7 @@ const bookModel = require('../models/domain/bookModel');
 const bookWebModel = require('../models/web/getBooksModels/bookDTO');
 const booksWebModel = require('../models/web/getBooksModels/booksDTO');
 const storeBookModel = require('../models/web/storeBooksModels/bookModel')
+const updateBookModel = require('../models/web/updateBooksModels/bookModel');
 
 
 function mapCollection(data){
@@ -85,4 +86,20 @@ function mapRequestToBookToStoreModel(request, authorId){
     return newBook;
 }
 
-module.exports = {mapCollection, mapSingle, mapToWebModel, mapSingleFromDbToWebModel, mapRequestToBookToStoreModel};
+function mapBookToBookToUpdateModel(book, author, bookID){
+    let bookToUpdate = new updateBookModel({
+        id: Number(bookID),
+        author: Number(author),
+        title: String(book.title),
+        price: Number(book.price),
+        amount: Number(book.amount),
+        imageUrl: String(book.imageUrl),
+        isbn: String(book.isbn),
+        description: String(book.description)
+    })
+
+    return bookToUpdate;
+}
+
+
+module.exports = {mapCollection, mapSingle, mapToWebModel, mapSingleFromDbToWebModel, mapRequestToBookToStoreModel, mapBookToBookToUpdateModel};

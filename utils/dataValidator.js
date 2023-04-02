@@ -26,7 +26,7 @@ function validateBook(bookToStore){
 }
 
 function validateAuthor(author){
-    if(author.name !== undefined  || author.surname !== undefined){
+    if(author.name !== undefined  && author.surname !== undefined){
         return true;
     }
     return false;
