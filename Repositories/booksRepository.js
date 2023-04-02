@@ -41,13 +41,13 @@ function deleteBookById(bookID){
  
 }
 
-function updateBook(book){
-    let query = `UPDATE books SET Title = '${book.title}', AuthorID = '${book.author}', 
+async function updateBook(book){
+    let query = `UPDATE books SET Title = '${book.title}', 
                     ISBN = '${book.isbn}', Description = '${book.description}', 
                     ImageURL = '${book.imageUrl}', Price = '${book.price}', Amount = '${book.amount}'
-                    WHERE ID = '${book.id}'`;
+                    WHERE ID = ${book.id}`;
     
-    if(database.sqlQuery(query)){
+    if(await database.sqlQuery(query)){
         return true;
     }else{
         return false;

@@ -86,10 +86,10 @@ function mapRequestToBookToStoreModel(request, authorId){
     return newBook;
 }
 
-function mapBookToBookToUpdateModel(book, author, bookID){
+function mapBookToBookToUpdateModel(book, bookID){
     let bookToUpdate = new updateBookModel({
         id: Number(bookID),
-        author: Number(author),
+        author: null,
         title: String(book.title),
         price: Number(book.price),
         amount: Number(book.amount),

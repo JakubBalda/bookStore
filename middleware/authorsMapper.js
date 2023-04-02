@@ -14,7 +14,7 @@ function mapAuthorToAuthorToUpdateModel(author, authorID){
     let existingAuthor = new updateAuthorModel({
         id: authorID,
         name: author.name,
-        surname: author, surname
+        surname: author.surname
     })
 
     return existingAuthor;

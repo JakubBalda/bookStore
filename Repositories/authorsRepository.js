@@ -38,9 +38,9 @@ async function findAuthorByName(author){
 }
 
 async function updateAuthor(author){
-    let query = `UPDATE authors SET name = '${author.name}', surname = '${author.surname} WHERE ID = '${author.id}'`;
+    let query = `UPDATE authors SET name = '${author.name}', surname = '${author.surname}' WHERE ID = ${author.id}`;
 
-    if(await databse.sqlQuery(query)){
+    if(await database.sqlQuery(query)){
         return true;
     }else{
         return false;

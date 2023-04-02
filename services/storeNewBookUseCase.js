@@ -32,7 +32,7 @@ async function isBookInStore(isbn){
 async function isAuthorInStore(author){
     let id = await authorsRepository.findAuthorByName(author);
     
-    return booleanFunctions.isNullOrUndefined(id[0]);
+    return booleanFunctions.isNullOrUndefined(id);
 }
 
 async function storeNewBook(author, book){

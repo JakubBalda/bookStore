@@ -11,7 +11,7 @@ function validateBook(bookToStore){
         if(bookToStore.description === undefined)
             return false;
 
-        if(bookToStore.imgURL === undefined)
+        if(bookToStore.imageUrl === undefined)
             return false;
         
         if(bookToStore.price === undefined)
