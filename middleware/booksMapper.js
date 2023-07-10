@@ -61,12 +61,21 @@ function mapSingleToWebModel(data){
 
 function mapSingleFromDbToWebModel(book, author){
 
+    console.log(book);
+
     let newBook = new bookWebModel ({
         id: Number(book.ID),
         author: String(`${author.Name} ${author.Surname}`),
         title: String(book.Title),
-        price: Number(book.Price),
+        isbn: String(book.ISBN),
+        imageUrl: String(book.ImageURL),
         amount: Number(book.Amount),
+        price: Number(book.Price),
+        description: String(book.Description),
+        publisher: String(book.Publisher),
+        publishYear: Number(book.PublishYear),
+        pageAmount: Number(book.PageAmount),
+        genre: String(book.Genre)
     });
 
     return newBook;

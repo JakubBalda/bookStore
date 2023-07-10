@@ -15,7 +15,8 @@ function addNewBook(bookToStore){
 }
 
 function getBookDetailsById(bookID){
-    let query = `SELECT ID, AuthorID, Title, Price, Amount FROM Books WHERE ID = ${bookID}`;
+    let query = `SELECT ID, AuthorID, Title, Price, Amount, Description, Publisher, 
+                    PublishYear, Genre, ImageURL, ISBN, PageAmount FROM Books WHERE ID = ${bookID}`;
 
     let bookDetails = database.sqlQuery(query);
     logger.logData(bookDetails);

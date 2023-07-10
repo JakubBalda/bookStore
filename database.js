@@ -1,3 +1,4 @@
+const { error } = require('console');
 const util = require('util');
 const dbConfig = require('../bookStore/databaseConfig'); // samo databaseConfig w nawiasie nie działa
 
