@@ -2,7 +2,6 @@ const mapper = require('../middleware/booksMapper');
 const logger = require('../middleware/logger');
 const booksRepository = require('../repositories/booksRepository');
 const authorsRepository = require('../repositories/authorsRepository');
-const authorModel = require('../models/domain/authorModel');
 const booleanFunctions = require('../utils/booleanFunctions');
 const validate = require('../utils/dataValidator'); 
 

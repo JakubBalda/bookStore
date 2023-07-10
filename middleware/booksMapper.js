@@ -89,7 +89,11 @@ function mapRequestToBookToStoreModel(request, authorId){
         amount: Number(request.amount),
         imageUrl: String(request.imageUrl),
         isbn: String(request.isbn),
-        description: String(request.description)
+        description: String(request.description),
+        publisher: String(request.publisher),
+        publishYear: Number(request.publishYear),
+        pageAmount: Number(request.pageAmount),
+        genre: String(request.genre)
     })
 
     return newBook;
