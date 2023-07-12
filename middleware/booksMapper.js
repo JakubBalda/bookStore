@@ -49,11 +49,12 @@ function mapToWebModel(data){
 function mapSingleToWebModel(data){
     
     let newBook = new bookWebModel ({
-        id: Number(data.id),
+        id: Number(data.ID),
         author: String(data.author),
-        title: String(data.title),
-        price: Number(data.price),
-        amount: Number(data.amount),
+        title: String(data.Title),
+        price: Number(data.Price),
+        amount: Number(data.Amount),
+        genre: String(data.Genre),
     });
 
     return newBook; 

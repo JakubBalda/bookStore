@@ -10,8 +10,8 @@ const authorsMapper = require('../middleware/authorsMapper');
     async function getBooks(req, res, next){
         logRequest('getBooks', req);
         
-        let books = getAllBooksUseCase.getBooks();
-
+        let books = await getAllBooksUseCase.getBooks();
+        logger.logData(books);
         res.send(books);
     }
 

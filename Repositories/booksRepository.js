@@ -1,6 +1,13 @@
 const logger = require('../middleware/logger');
 const database = require('../database');
 
+async function getAllBooks(){
+    let query = `SELECT ID, AuthorID, Title, Price, Amount, Genre FROM Books`;
+
+    let books = database.sqlQuery(query);
+    return books;
+}
+
 function addNewBook(bookToStore){
     let query = `INSERT INTO books (Title, AuthorID, ISBN, Description, ImageURL, Price, Amount, Publisher, PublishYear, PageAmount, Genre) 
                     VALUES ('${bookToStore.title}', ${bookToStore.author}, '${bookToStore.isbn}',
@@ -56,4 +63,4 @@ async function updateBook(book){
     }
 }
 
-module.exports = {getBookDetailsById, addNewBook, findBookIdByIsbn, deleteBookById, updateBook};
+module.exports = {getBookDetailsById, addNewBook, findBookIdByIsbn, deleteBookById, updateBook, getAllBooks};

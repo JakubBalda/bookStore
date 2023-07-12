@@ -1,13 +1,14 @@
-const repository = require('../repositories/inmemory');
+const repository = require('../repositories/booksRepository');
 const booksMapper = require('../middleware/booksMapper');
 const logger = require('../middleware/logger');
 
-function getBooks(req, res, next){
+async function getBooks(req, res, next){
     logger.logInformation('getAllBooksUseCase.getBooks requested');
 
-    let booksModel = repository.readBooks();
+    let booksModel = await repository.getAllBooks();
+
     
-    let booksDTO = booksMapper.mapToWebModel(booksModel.books);
+    let booksDTO = booksMapper.mapToWebModel(booksModel);
 
     logger.logData(booksDTO);
     return booksDTO;

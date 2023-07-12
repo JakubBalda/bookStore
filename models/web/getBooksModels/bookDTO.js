@@ -13,7 +13,7 @@ const BookSchema = new Schema({
     publisher: {type: String, required: true},
     publishYear: Number,
     pageAmount: {type: Number, min: [1, 'Number of pages cannot be below 1']},
-    genre: {type: String, reqired: true}
+    genre: {type: String, reqired: true},
 })
 
 module.exports = mongoose.model('BookDTO', BookSchema);
