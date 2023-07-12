@@ -35,26 +35,26 @@ function mapSingle(data){
     return newBook; 
 }
 
-function mapToWebModel(data){
+function mapToWebModel(books, authors){
     let booksDTO = new booksWebModel();
     
-    for(let i=0; i<data.length; i++){
-        let newWebBook = mapSingleToWebModel(data[i]);
+    for(let i=0; i<books.length; i++){
+        let newWebBook = mapSingleToWebModel(books[i], authors.authors[books[i].AuthorID-1]);
         
         booksDTO.books.push(newWebBook);
     }
+    console.log(booksDTO);
     return booksDTO;
 }
 
-function mapSingleToWebModel(data){
+function mapSingleToWebModel(book, author){
     
     let newBook = new bookWebModel ({
-        id: Number(data.ID),
-        author: String(data.author),
-        title: String(data.Title),
-        price: Number(data.Price),
-        amount: Number(data.Amount),
-        genre: String(data.Genre),
+        id: Number(book.ID),
+        author: String(author.name + ' ' +author.surname),
+        title: String(book.Title),
+        price: Number(book.Price),
+        amount: Number(book.Amount),
     });
 
     return newBook; 

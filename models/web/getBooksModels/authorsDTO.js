@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const BooksSchema = new Schema({
-    books: [
+const AuthorsSchema = new Schema({
+    authors: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'BookDTO'
+            ref: 'AuthorDTO'
         }
     ]
 })
 
-module.exports = mongoose.model('BooksDTO', BooksSchema);
-
-
-
-
+module.exports = mongoose.model('AuthorsDTO', AuthorsSchema);

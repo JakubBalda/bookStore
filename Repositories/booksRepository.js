@@ -2,7 +2,7 @@ const logger = require('../middleware/logger');
 const database = require('../database');
 
 async function getAllBooks(){
-    let query = `SELECT ID, AuthorID, Title, Price, Amount, Genre FROM Books`;
+    let query = `SELECT ID, AuthorID, Title, Price, Amount FROM Books`;
 
     let books = database.sqlQuery(query);
     return books;
@@ -63,4 +63,11 @@ async function updateBook(book){
     }
 }
 
-module.exports = {getBookDetailsById, addNewBook, findBookIdByIsbn, deleteBookById, updateBook, getAllBooks};
+async function getGenres(){
+    let query = `SELECT Genre FROM Books`;
+
+    let genres = database.sqlQuery(query);
+    return genres;
+}
+
+module.exports = {getGenres, getBookDetailsById, addNewBook, findBookIdByIsbn, deleteBookById, updateBook, getAllBooks};

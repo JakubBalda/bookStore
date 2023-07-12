@@ -1,5 +1,7 @@
 const storeAuthorModel = require('../models/web/storeBooksModels/authorModel')
 const updateAuthorModel = require('../models/web/updateBooksModels/authorModel');
+const authorsWebModel = require('../models/web/getBooksModels/authorsDTO');
+const authorWebModel = require('../models/web/getBooksModels/authorDTO');
 
 function mapRequestToAuthorToStoreModel(request){
     let newAuthor = new storeAuthorModel({
@@ -20,4 +22,24 @@ function mapAuthorToAuthorToUpdateModel(author, authorID){
     return existingAuthor;
 }
 
-module.exports = {mapRequestToAuthorToStoreModel, mapAuthorToAuthorToUpdateModel};
+function mapAuthorsToWebModel(authors){
+    let authorsDTO = new authorsWebModel();
+
+    for(let i = 0; i < authors.length; i++){
+        let newWebAuthor = mapSingleAuthor(authors[i]);
+
+        authorsDTO.authors.push(newWebAuthor);
+    }
+    return authorsDTO;
+}
+
+function mapSingleAuthor(author){
+    let newAuthor = authorWebModel({
+        id: Number(author.ID),
+        name: String(author.name),
+        surname: String(author.surname),
+    });
+    return newAuthor;
+}
+
+module.exports = {mapAuthorsToWebModel, mapRequestToAuthorToStoreModel, mapAuthorToAuthorToUpdateModel};

@@ -47,4 +47,12 @@ async function updateAuthor(author){
     }
 }
 
-module.exports = {getAuthorById, addNewAuthor, findAuthorByName, updateAuthor};
+async function getAllAuthors(){
+    let query = `SELECT ID, name, surname FROM authors`;
+
+    let authors = await database.sqlQuery(query);
+    
+    return authors;
+}
+
+module.exports = {getAuthorById, addNewAuthor, findAuthorByName, updateAuthor, getAllAuthors};

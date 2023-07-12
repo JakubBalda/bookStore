@@ -3,16 +3,15 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const bodyParser = require('body-parser');
-const passport = require('passport');
-const session = require('express-session');
+const cors = require('cors');
+
+
+const app = express();
+app.use(cors());
 
 // require routes
 const indexRouter = require('./routes/index');
 const booksRouter = require('./routes/booksRouter');
-
-
-const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
