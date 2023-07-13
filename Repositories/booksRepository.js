@@ -2,7 +2,7 @@ const logger = require('../middleware/logger');
 const database = require('../database');
 
 async function getAllBooks(){
-    let query = `SELECT ID, AuthorID, Title, Price, Amount FROM Books`;
+    let query = `SELECT ID, AuthorID, Title, Price, ImageBlob, ImageURL FROM Books`;
 
     let books = database.sqlQuery(query);
     return books;

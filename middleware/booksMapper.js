@@ -40,10 +40,8 @@ function mapToWebModel(books, authors){
     
     for(let i=0; i<books.length; i++){
         let newWebBook = mapSingleToWebModel(books[i], authors.authors[books[i].AuthorID-1]);
-        
         booksDTO.books.push(newWebBook);
     }
-    console.log(booksDTO);
     return booksDTO;
 }
 
@@ -54,7 +52,8 @@ function mapSingleToWebModel(book, author){
         author: String(author.name + ' ' +author.surname),
         title: String(book.Title),
         price: Number(book.Price),
-        amount: Number(book.Amount),
+        imageBlob: Buffer(book.ImageBlob),
+        imageUrl: String(book.ImageURL)
     });
 
     return newBook; 
