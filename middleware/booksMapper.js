@@ -53,7 +53,8 @@ function mapSingleToWebModel(book, author){
         title: String(book.Title),
         price: Number(book.Price),
         imageBlob: Buffer(book.ImageBlob),
-        imageUrl: String(book.ImageURL)
+        imageUrl: String(book.ImageURL),
+        genre: String(book.Genre),
     });
 
     return newBook; 
@@ -69,6 +70,7 @@ function mapSingleFromDbToWebModel(book, author){
         title: String(book.Title),
         isbn: String(book.ISBN),
         imageUrl: String(book.ImageURL),
+        imageBlob: Buffer(book.ImageBlob),
         amount: Number(book.Amount),
         price: Number(book.Price),
         description: String(book.Description),

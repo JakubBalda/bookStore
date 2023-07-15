@@ -2,7 +2,7 @@ const logger = require('../middleware/logger');
 const database = require('../database');
 
 async function getAllBooks(){
-    let query = `SELECT ID, AuthorID, Title, Price, ImageBlob, ImageURL FROM Books`;
+    let query = `SELECT ID, AuthorID, Title, Price, ImageBlob, ImageURL, Genre FROM Books`;
 
     let books = database.sqlQuery(query);
     return books;
@@ -24,7 +24,7 @@ function addNewBook(bookToStore){
 
 function getBookDetailsById(bookID){
     let query = `SELECT ID, AuthorID, Title, Price, Amount, Description, Publisher, 
-                    PublishYear, Genre, ImageURL, ISBN, PageAmount FROM Books WHERE ID = ${bookID}`;
+                    PublishYear, Genre, ImageURL, ImageBlob, ISBN, PageAmount FROM Books WHERE ID = ${bookID}`;
 
     let bookDetails = database.sqlQuery(query);
     logger.logData(bookDetails);

@@ -1,5 +1,5 @@
 const booksRepository = require('../repositories/booksRepository');
-const autorsRepository = require('../Repositories/authorsRepository');
+const autorsRepository = require('../repositories/authorsRepository');
 const booksMapper = require('../middleware/booksMapper');
 const authorsMapper = require('../middleware/authorsMapper');
 const logger = require('../middleware/logger');
