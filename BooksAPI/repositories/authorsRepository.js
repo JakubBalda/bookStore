@@ -1,4 +1,3 @@
-const mapper = require('../middleware/booksMapper');
 const logger = require('../middleware/logger');
 const database = require('../database');
 const booleanFunctions = require('../utils/booleanFunctions');
