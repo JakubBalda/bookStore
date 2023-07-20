@@ -1,13 +1,16 @@
 const logger = require('../middleware/logger');
 const database = require('../database');
-const { query } = require('express');
 
 async function getUserLoginData(){
 
 }
 
 async function addNewUser(userData){
-    let query = `INSERT INTO Users (Login, Password) VALUES (${userData.login}, ${userData.password})`;
+    let query = `INSERT INTO Users 
+                    (Login, Password, Role, Name, Surname, Street, HouseNumber, FlatNumber, PostalCode, City, Mail, PhoneNumber) 
+                        VALUES (${userData.login}, ${userData.password}, ${userData.name}, ${userData.surname}, ${userData.street},
+                            ${userData.houseNumber}, ${userData.flatNumber}, ${userData.postalCode}, ${userData.city}, ${userData.mail},
+                            ${userData.phoneNumber},)`;
 
     if(await database.sqlQuery(query)){
         return true;
@@ -16,4 +19,16 @@ async function addNewUser(userData){
     }
 }
 
-module.exports = {getUserLoginData, addNewUser};
+async function findUserByMail(userMail){
+    let query = `SELECT ID FROM Users WHERE Mail = '${userMail}'`;
+
+    return database.sqlQuery(query);
+}
+
+async function findUserByLogin(userLogin){
+    let query = `SELECT ID FROM Users WHERE Login = '${userLogin}'`;
+
+    return database.sqlQuery(query);
+}
+
+module.exports = {getUserLoginData, addNewUser, findUserByMail, findUserByLogin};
