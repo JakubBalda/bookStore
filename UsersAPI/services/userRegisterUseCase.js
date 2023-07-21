@@ -8,11 +8,11 @@ async function userRegister(userData){
     let newUser = userMapper.mapRequestToUserRegisterModel(userData);
 
     if(validate.validateUser(newUser)){
-        if(isMailUsed(newUser.mail) && isLoginUsed(newUser.login)){
+        if(await isMailUsed(newUser.mail) && await isLoginUsed(newUser.login)){
 
             logger.logData(newUser);
             return usersRepository.addNewUser(newUser);
-        }else if (!isLoginUsed(newUser.login)){
+        }else if (! await isLoginUsed(newUser.login)){
             logger.logInformation('Login zajęty')
             return false;
         }else{
@@ -27,14 +27,14 @@ async function userRegister(userData){
 }
 
 async function isMailUsed(userMail){
-    let userId = usersRepository.findUserByMail(userMail);
+    let userId = await usersRepository.findUserByMail(userMail);
     logger.logData(userId[0]);
     
     return booleanFunctions.isNullOrUndefined(userId[0]);
 }
 
 async function isLoginUsed(userLogin){
-    let userId = usersRepository.findUserByLogin(userLogin);
+    let userId = await usersRepository.findUserByLogin(userLogin);
     logger.logData(userId[0]);
     
     return booleanFunctions.isNullOrUndefined(userId[0]);

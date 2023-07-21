@@ -1,10 +1,6 @@
 const logger = require('../middleware/logger');
 const database = require('../database');
 
-async function getUserLoginData(){
-
-}
-
 async function addNewUser(userData){
     let query = `INSERT INTO Users 
                     (Login, Password, Role, Name, Surname, Street, HouseNumber, FlatNumber, Postal, City, Mail, PhoneNumber) 
@@ -31,4 +27,4 @@ async function findUserByLogin(userLogin){
     return database.sqlQuery(query);
 }
 
-module.exports = {getUserLoginData, addNewUser, findUserByMail, findUserByLogin};
+module.exports = {addNewUser, findUserByMail, findUserByLogin};
