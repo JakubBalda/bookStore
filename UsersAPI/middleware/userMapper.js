@@ -12,7 +12,7 @@ function mapRequestToUserRegisterModel(req){
         houseNumber: String(req.houseNumber),
         flatNumber: String(req.flatNumber),
         postalCode: String(req.postalCode),
-        city: String(req,city),
+        city: String(req.city),
         mail: String(req.mail),
         phoneNumber: String(req.phoneNumber)
     });

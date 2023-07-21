@@ -7,10 +7,12 @@ const validate = require('../utils/dataValidator');
 async function userRegister(userData){ 
     let newUser = userMapper.mapRequestToUserRegisterModel(userData);
 
-    if(validate.validateUser){
+    if(validate.validateUser(newUser)){
         if(isMailUsed(newUser.mail) && isLoginUsed(newUser.login)){
 
-            return usersRepository.addNewUser(newUser);
+            logger.logData(newUser);
+            return true;
+            //return usersRepository.addNewUser(newUser);
         }else if (!isLoginUsed(newUser.login)){
             logger.logInformation('Login zajęty')
             return false;
@@ -18,8 +20,11 @@ async function userRegister(userData){
             logger.logInformation('E-mail zajęty')
             return false;
         }
+        
     }
-
+    
+    logger.logInformation('Validate error');
+    return false;
 }
 
 async function isMailUsed(userMail){
