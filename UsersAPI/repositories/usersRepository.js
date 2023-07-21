@@ -7,10 +7,10 @@ async function getUserLoginData(){
 
 async function addNewUser(userData){
     let query = `INSERT INTO Users 
-                    (Login, Password, Role, Name, Surname, Street, HouseNumber, FlatNumber, PostalCode, City, Mail, PhoneNumber) 
-                        VALUES (${userData.login}, ${userData.password}, ${userData.name}, ${userData.surname}, ${userData.street},
-                            ${userData.houseNumber}, ${userData.flatNumber}, ${userData.postalCode}, ${userData.city}, ${userData.mail},
-                            ${userData.phoneNumber},)`;
+                    (Login, Password, Role, Name, Surname, Street, HouseNumber, FlatNumber, Postal, City, Mail, PhoneNumber) 
+                        VALUES ('${userData.login}', '${userData.password}', '${userData.role}', '${userData.name}', '${userData.surname}', '${userData.street}',
+                            '${userData.houseNumber}', '${userData.flatNumber}', '${userData.postalCode}', '${userData.city}', '${userData.mail}',
+                            '${userData.phoneNumber}')`;
 
     if(await database.sqlQuery(query)){
         return true;

@@ -26,7 +26,7 @@ function validateUser(newUser){
             return false; 
         }
 
-        if(newUser.houseNumber === undefined || newUser.houseNumber === '' || newUser.houseNumber.length > 3){
+        if(newUser.houseNumber === undefined || newUser.houseNumber === '' || newUser.houseNumber.length > 4){
             return false; 
         }
 
@@ -47,7 +47,7 @@ function validateUser(newUser){
             return false; 
         }
 
-        if(newUser.phoneNumber === undefined || newUser.phoneNumber === '' || newUser.phoneNumber.length > 11){
+        if(newUser.phoneNumber === undefined || newUser.phoneNumber === '' || newUser.phoneNumber.length > 12){
            return false; 
         }
         

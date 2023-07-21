@@ -11,8 +11,7 @@ async function userRegister(userData){
         if(isMailUsed(newUser.mail) && isLoginUsed(newUser.login)){
 
             logger.logData(newUser);
-            return true;
-            //return usersRepository.addNewUser(newUser);
+            return usersRepository.addNewUser(newUser);
         }else if (!isLoginUsed(newUser.login)){
             logger.logInformation('Login zajęty')
             return false;
@@ -22,7 +21,7 @@ async function userRegister(userData){
         }
         
     }
-    
+
     logger.logInformation('Validate error');
     return false;
 }
