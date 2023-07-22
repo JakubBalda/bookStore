@@ -1,11 +1,15 @@
 const logger = require('../middleware/logger');
+const mapper = require('../middleware/userMapper');
 const userLoginUseCase = require('../services/userLoginUseCase');
 const userRegisterUseCase = require('../services/userRegisterUseCase');
 
 async function login(req, res, next){
     logRequest('login', req);
 
-    res.send('Login');
+    let userLoginData = mapper.mapRequestToUserLoginModel(req.query);
+    let isLoggingInPassed = await userLoginUseCase.userLogginIn(userLoginData);
+
+    res.send(isLoggingInPassed);
 }
 
 async function register(req, res, next){

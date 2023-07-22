@@ -1,5 +1,6 @@
 const logger = require('./logger');
 const userRegisterModel = require('../models/web/userRegisterModel');
+const userLoginModel = require('../models/web/userLoginModel');
 
 function mapRequestToUserRegisterModel(req){
     let newUser = new userRegisterModel({
@@ -20,4 +21,33 @@ function mapRequestToUserRegisterModel(req){
     return newUser;
 }
 
-module.exports = {mapRequestToUserRegisterModel};
+function mapRequestToUserLoginModel(req){
+    let loginData = new userLoginModel({
+        login: req.login,
+        password: req.password
+    });
+
+    return loginData;
+}
+
+function mapDbUserDataToLoginModel(userData){
+    let loginData = new userLoginModel({
+        login: userData.Login,
+        password: userData.Password,
+        id: userData.ID,
+        role: userData.Role
+    });
+
+    return loginData;
+}
+
+function mapPassedLoginUserData(userData){
+    let loginData = new userLoginModel({
+        login: userData.login,
+        id: userData.id,
+        role: userData.role
+    });
+
+    return loginData;
+}
+module.exports = {mapRequestToUserRegisterModel, mapRequestToUserLoginModel, mapDbUserDataToLoginModel, mapPassedLoginUserData};
