@@ -5,15 +5,16 @@ const mapper = require('../middleware/userMapper');
 async function userLogginIn(userLoggingInData){
 
     let userLogginInDataFromDB = await userRepository.getUserLoginDataByLogin(userLoggingInData.login);
-    userLogginInDataFromDB = mapper.mapDbUserDataToLoginModel(userLogginInDataFromDB[0]);
+    
+    if(userLogginInDataFromDB[0] !== undefined){
+        userLogginInDataFromDB = mapper.mapDbUserDataToLoginModel(userLogginInDataFromDB[0]);
 
-    if(userLogginInDataFromDB.id !== undefined){
         //TODO: Enkrypcja haseł
         if(userLogginInDataFromDB.password === userLoggingInData.password){
             return mapper.mapPassedLoginUserData(userLogginInDataFromDB);
         }
     }
-        return 'Logging in failed';
+        return 'Failed';
 }
 
 module.exports = {userLogginIn};
