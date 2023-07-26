@@ -6,16 +6,16 @@ function mapRequestToUserRegisterModel(req){
     let newUser = new userRegisterModel({
         login: String(req.login),
         password: String(req.password),
-        role: String(req.role),
+        role: String('User'),
         name: String(req.name),
         surname: String(req.surname),
         street: String(req.street),
         houseNumber: String(req.houseNumber),
         flatNumber: String(req.flatNumber),
-        postalCode: String(req.postalCode),
+        postalCode: String(req.postal),
         city: String(req.city),
         mail: String(req.mail),
-        phoneNumber: String(req.phoneNumber)
+        phoneNumber: String('+48' + req.phoneNumber)
     });
 
     return newUser;

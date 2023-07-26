@@ -17,7 +17,7 @@ async function login(req, res, next){
 async function register(req, res, next){
     logRequest('register', req);
 
-    let register = userRegisterUseCase.userRegister(req.query);
+    let register = userRegisterUseCase.userRegister(req.body);
 
     res.send(register)
 }

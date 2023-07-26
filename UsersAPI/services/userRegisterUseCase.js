@@ -14,16 +14,15 @@ async function userRegister(userData){
             return usersRepository.addNewUser(newUser);
         }else if (! await isLoginUsed(newUser.login)){
             logger.logInformation('Login zajęty')
-            return false;
+            return 'login';
         }else{
             logger.logInformation('E-mail zajęty')
-            return false;
+            return 'mail';
         }
-        
     }
 
     logger.logInformation('Validate error');
-    return false;
+    return 'failed';
 }
 
 async function isMailUsed(userMail){
