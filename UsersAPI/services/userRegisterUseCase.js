@@ -3,15 +3,20 @@ const userMapper = require('../middleware/userMapper');
 const usersRepository = require('../repositories/usersRepository');
 const booleanFunctions = require('../utils/booleanFunctions');
 const validate = require('../utils/dataValidator');
+const bcrypt = require('bcrypt');
 
 async function userRegister(userData){ 
     let newUser = userMapper.mapRequestToUserRegisterModel(userData);
 
     if(validate.validateUser(newUser)){
         if(await isMailUsed(newUser.mail) && await isLoginUsed(newUser.login)){
-
-            logger.logData(newUser);
-            return usersRepository.addNewUser(newUser);
+            
+            bcrypt.hash(newUser.password, 10, (err, hash) => {
+                newUser.password = hash;
+                
+                return usersRepository.addNewUser(newUser);
+            });
+            
         }else if (! await isLoginUsed(newUser.login)){
             logger.logInformation('Login zajęty')
             return 'login';
