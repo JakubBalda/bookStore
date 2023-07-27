@@ -1,6 +1,7 @@
 const logger = require('../middleware/logger');
 const userRepository = require('../repositories/usersRepository');
 const mapper = require('../middleware/userMapper');
+const bcrypt = require('bcrypt');
 
 async function userLogginIn(userLoggingInData){
 
@@ -9,10 +10,11 @@ async function userLogginIn(userLoggingInData){
     if(userLogginInDataFromDB[0] !== undefined){
         userLogginInDataFromDB = mapper.mapDbUserDataToLoginModel(userLogginInDataFromDB[0]);
 
-        //TODO: Enkrypcja haseł
-        if(userLogginInDataFromDB.password === userLoggingInData.password){
+        if(await bcrypt.compare(userLoggingInData.password, userLogginInDataFromDB.password)){
             return mapper.mapPassedLoginUserData(userLogginInDataFromDB);
         }
+        
+        return 'Failed'
     }
         return 'Failed';
 }
