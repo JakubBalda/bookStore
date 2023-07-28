@@ -33,4 +33,10 @@ async function getUserLoginDataByLogin(userLogin){
     return database.sqlQuery(query);
 }
 
-module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin};
+async function getAllDetails(userId){
+    let query = `SELECT * FROM Users WHERE ID = '${userId}'`;
+
+    return database.sqlQuery(query);
+}
+
+module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, getAllDetails};

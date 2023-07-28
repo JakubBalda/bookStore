@@ -2,6 +2,7 @@ const logger = require('../middleware/logger');
 const mapper = require('../middleware/userMapper');
 const userLoginUseCase = require('../services/userLoginUseCase');
 const userRegisterUseCase = require('../services/userRegisterUseCase');
+const getAllUserDetailsUseCase = require('../services/getAllUserDetails');
 
 async function login(req, res, next){
     logRequest('login', req);
@@ -22,7 +23,14 @@ async function register(req, res, next){
     res.send(register)
 }
 
-module.exports = {login, register}
+async function getAllUserData(req,res,next){
+    logRequest('getAllUserData', req);
+    
+    let userData = getAllUserDetailsUseCase.getUserDetails(req.params.id);
+    res.send(userData);
+}
+
+module.exports = {login, register, getAllUserData}
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);
