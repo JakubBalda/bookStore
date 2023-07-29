@@ -3,10 +3,10 @@ const mapper = require('../middleware/userMapper');
 const repository = require('../repositories/usersRepository');
 
 async function getUserDetails(userId){
-    let userData = repository.getAllDetails(userId);
-    userData = mapper
-
-    return 
+    logger.logRequest('getAllUserDetailsUseCase.getUserDetails requested')
+    let userData = await repository.getAllDetails(userId);
+    
+    return mapper.mapAllUserDetailsToWebModel(userData[0]);
 }
 
 module.exports = {getUserDetails};

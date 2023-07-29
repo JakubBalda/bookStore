@@ -26,7 +26,8 @@ async function register(req, res, next){
 async function getAllUserData(req,res,next){
     logRequest('getAllUserData', req);
     
-    let userData = getAllUserDetailsUseCase.getUserDetails(req.params.id);
+    let userData = await getAllUserDetailsUseCase.getUserDetails(req.params.id);
+
     res.send(userData);
 }
 

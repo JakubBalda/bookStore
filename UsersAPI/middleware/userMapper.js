@@ -54,7 +54,17 @@ function mapPassedLoginUserData(userData){
 
 function mapAllUserDetailsToWebModel(userData){
     let userDetails = new userModel({
-
+        login: userData.Login,
+        role: userData.Role,
+        name: userData.Name,
+        surname: userData.Surname,
+        street: userData.Street,
+        houseNumber: userData.HouseNumber,
+        flatNumber: userData.FlatNumber,
+        postalCode: userData.Postal,
+        city: userData.City,
+        mail: userData.Mail,
+        phoneNumber: userData.PhoneNumber
     });
 
     return userDetails;
