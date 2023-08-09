@@ -5,7 +5,7 @@ const booleanFunctions = require('../utils/booleanFunctions');
 const validate = require('../utils/dataValidator');
 
 async function updateData(userData, userId){
-
+    return usersRepository.updateUserDetails(userData, userId);
 }
 
 module.exports = {updateData};
