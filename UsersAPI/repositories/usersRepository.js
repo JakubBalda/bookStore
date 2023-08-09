@@ -34,7 +34,7 @@ async function getUserLoginDataByLogin(userLogin){
 }
 
 async function getAllDetails(userId){
-    let query = `SELECT Login, Name, Surname, City, Street, HouseNumber, FlatNumber, Role, Mail, PhoneNumber FROM Users WHERE ID = '${userId}'`;
+    let query = `SELECT Login, Name, Surname, City, Street, HouseNumber, FlatNumber, Role, Mail, PhoneNumber, Postal FROM Users WHERE ID = '${userId}'`;
 
     return database.sqlQuery(query);
 }
