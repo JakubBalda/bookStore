@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { login, register, getAllUserData } = require('../controllers/usersController');
+const { login, register, getAllUserData, updateUserData, updateUserPassword } = require('../controllers/usersController');
 
 /* POST Login /api/users/login. */
 router.post('/login', login);
@@ -10,5 +10,11 @@ router.post('/register', register);
 
 /* GET GetAllUserData /api/users/:id. */
 router.get('/:id', getAllUserData);
+
+/* PUT UpdateUserData /api/users/data/:id. */
+router.put('/data/:id', updateUserData);
+
+/* PUT UpdateUserData /api/users/password/:id. */
+router.put('/password/:id', updateUserPassword);
 
 module.exports = router;

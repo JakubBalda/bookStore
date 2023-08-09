@@ -23,7 +23,7 @@ async function register(req, res, next){
     res.send(register)
 }
 
-async function getAllUserData(req,res,next){
+async function getAllUserData(req, res, next){
     logRequest('getAllUserData', req);
     
     let userData = await getAllUserDetailsUseCase.getUserDetails(req.params.id);
@@ -31,7 +31,19 @@ async function getAllUserData(req,res,next){
     res.send(userData);
 }
 
-module.exports = {login, register, getAllUserData}
+async function updateUserData(req, res, next){
+    logRequest('updateUserData', req);
+
+    res.send('completed');
+}
+
+async function updateUserPassword(req, res, next){
+    logRequest('updateUserPassword', req);
+
+    res.send('updated')
+}
+
+module.exports = {login, register, getAllUserData, updateUserData, updateUserPassword}
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);
