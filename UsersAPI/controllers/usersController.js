@@ -3,6 +3,7 @@ const mapper = require('../middleware/userMapper');
 const userLoginUseCase = require('../services/userLoginUseCase');
 const userRegisterUseCase = require('../services/userRegisterUseCase');
 const getAllUserDetailsUseCase = require('../services/getAllUserDetails');
+const updateUserDataUseCase = require('../services/updateUserDataUseCase');
 
 async function login(req, res, next){
     logRequest('login', req);
@@ -33,6 +34,9 @@ async function getAllUserData(req, res, next){
 
 async function updateUserData(req, res, next){
     logRequest('updateUserData', req);
+
+    let userData = mapper.mapRequestToUserModel(req.body);
+    let isUpdated = updateUserDataUseCase.updateData(userData, req.params.id);
 
     res.send('completed');
 }

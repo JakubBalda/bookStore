@@ -81,7 +81,7 @@ function mapRequestToUserModel(req){
         postalCode: req.postal,
         city: req.city,
         mail: req.mail,
-        phoneNumber: req.phoneNumber
+        phoneNumber: String('+48' + req.phoneNumber)
     });
 
     return userData;
