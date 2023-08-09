@@ -69,4 +69,23 @@ function mapAllUserDetailsToWebModel(userData){
 
     return userDetails;
 }
-module.exports = {mapRequestToUserRegisterModel, mapRequestToUserLoginModel, mapDbUserDataToLoginModel, mapPassedLoginUserData, mapAllUserDetailsToWebModel};
+
+function mapRequestToUserModel(req){
+    let userData = new userModel({
+        login: req.login,
+        name: req.name,
+        surname: req.surname,
+        street: req.street,
+        houseNumber: req.houseNumber,
+        flatNumber: req.flatNumber,
+        postalCode: req.postal,
+        city: req.city,
+        mail: req.mail,
+        phoneNumber: req.phoneNumber
+    });
+
+    return userData;
+}
+module.exports = {mapRequestToUserRegisterModel, mapRequestToUserLoginModel, 
+                    mapDbUserDataToLoginModel, mapPassedLoginUserData, mapAllUserDetailsToWebModel, 
+                    mapRequestToUserModel};
