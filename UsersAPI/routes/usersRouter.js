@@ -12,9 +12,9 @@ router.post('/register', register);
 router.get('/:id', getAllUserData);
 
 /* PUT UpdateUserData /api/users/data/:id. */
-router.put('/data/:id', updateUserData);
+router.put('/updateData/:id', updateUserData);
 
 /* PUT UpdateUserData /api/users/password/:id. */
-router.put('/password/:id', updateUserPassword);
+router.put('/updatePassword/:id', updateUserPassword);
 
 module.exports = router;

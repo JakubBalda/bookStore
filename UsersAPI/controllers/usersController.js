@@ -4,6 +4,7 @@ const userLoginUseCase = require('../services/userLoginUseCase');
 const userRegisterUseCase = require('../services/userRegisterUseCase');
 const getAllUserDetailsUseCase = require('../services/getAllUserDetails');
 const updateUserDataUseCase = require('../services/updateUserDataUseCase');
+const updateUserPasswordUseCase = require('../services/updateUserPasswordUseCase');
 
 async function login(req, res, next){
     logRequest('login', req);
@@ -38,13 +39,17 @@ async function updateUserData(req, res, next){
     let userData = mapper.mapRequestToUserModel(req.body);
     let isUpdated = updateUserDataUseCase.updateData(userData, req.params.id);
 
-    res.send('completed');
+    res.send(isUpdated);
 }
 
 async function updateUserPassword(req, res, next){
     logRequest('updateUserPassword', req);
 
-    res.send('updated')
+    if(  updateUserPasswordUseCase.encryptPassword(req.body, req.params.id))
+        res.send('Zaktualizowano');
+    else
+        res.send('Error');
+
 }
 
 module.exports = {login, register, getAllUserData, updateUserData, updateUserPassword}

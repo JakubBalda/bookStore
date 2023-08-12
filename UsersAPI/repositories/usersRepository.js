@@ -40,12 +40,18 @@ async function getAllDetails(userId){
 }
 
 async function updateUserDetails(userData, userId){
-    let query = `UPDATE Users SET Login = ${userData.login}, Name = ${userData.name}, 
-                    Surname = ${userData.surname}, Street = ${userData.street}, City = ${userData.city},
-                    HouseNumber = ${userData.houseNumber}, FlatNumber = ${userData.flatNumber}, Mail = ${userData.mail},
-                    Postal = ${userData.postalCode}, PhoneNumber = ${userData.phoneNumber} WHERE ID = ${userId}`;
+    let query = `UPDATE Users SET Login = '${userData.login}', Name = '${userData.name}', 
+                    Surname = '${userData.surname}', Street = '${userData.street}', City = '${userData.city}',
+                    HouseNumber = '${userData.houseNumber}', FlatNumber = '${userData.flatNumber}', Mail = '${userData.mail}',
+                    Postal = '${userData.postalCode}', PhoneNumber = '${userData.phoneNumber}' WHERE ID = ${userId}`;
     
     return database.sqlQuery(query);
 }
 
-module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, getAllDetails, updateUserDetails};
+async function updateUserPassword(userPassword, userId){
+    let query = `UPDATE Users SET Password = '${userPassword}' WHERE ID = ${userId}`;
+
+    return await database.sqlQuery(query);
+}
+
+module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, getAllDetails, updateUserDetails, updateUserPassword};
