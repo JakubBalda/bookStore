@@ -37,7 +37,7 @@ async function updateUserData(req, res, next){
     logRequest('updateUserData', req);
 
     let userData = mapper.mapRequestToUserModel(req.body);
-    let isUpdated = updateUserDataUseCase.updateData(userData, req.params.id);
+    let isUpdated = await updateUserDataUseCase.updateData(userData, req.params.id);
 
     res.send(isUpdated);
 }

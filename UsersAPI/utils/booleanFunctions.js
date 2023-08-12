@@ -5,4 +5,9 @@ function isNullOrUndefined(object){
     return object === undefined || object === null;
 }
 
-module.exports = {isNullOrUndefined};
+function notEquals(userId, userIdFromDb){
+
+    return userId != userIdFromDb;
+}
+
+module.exports = {isNullOrUndefined, notEquals};
