@@ -14,7 +14,7 @@ async function userLogginIn(userLoggingInData){
             return mapper.mapPassedLoginUserData(userLogginInDataFromDB);
         }
         
-        return 'Failed'
+            return 'Failed'
     }
         return 'Failed';
 }
