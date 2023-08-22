@@ -53,7 +53,8 @@ function deleteBookById(bookID){
 async function updateBook(book){
     let query = `UPDATE books SET Title = '${book.title}', 
                     ISBN = '${book.isbn}', Description = '${book.description}', 
-                    ImageURL = '${book.imageUrl}', Price = '${book.price}', Amount = '${book.amount}'
+                    Publisher = '${book.publisher}', Price = '${book.price}', Amount = '${book.amount}',
+                    PublishYear = '${book.publishYear}', PageAmount = '${book.pageAmount}', Genre = '${book.genre}'
                     WHERE ID = ${book.id}`;
     
     if(await database.sqlQuery(query)){

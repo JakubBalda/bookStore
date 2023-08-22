@@ -16,7 +16,7 @@ function getAuthorById(authorId){
 }
 
 async function addNewAuthor(author){
-    authorId = await findAuthorByName(author);
+    let authorId = await findAuthorByName(author);
 
     if(authorExists(authorId[0])){
         let query = `INSERT INTO authors (name, surname) VALUES ('${author.name}', '${author.surname}')`;

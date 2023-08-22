@@ -44,10 +44,11 @@ const authorsMapper = require('../middleware/authorsMapper');
     async function updateBookDetails(req, res, next){
         logRequest('updateBookDetails', req);
 
-        let author = authorsMapper.mapAuthorToAuthorToUpdateModel(req.query, null);
-        let book = booksMapper.mapBookToBookToUpdateModel(req.query, req.params.id);
+        let author = authorsMapper.mapAuthorToAuthorToUpdateModel(req.body, null);
+        let oldAuthor = authorsMapper.mapOldAuthorDataToWebModel(req.body);
+        let book = booksMapper.mapBookToBookToUpdateModel(req.body, req.params.id);
 
-        let information = await updateDetails.updateDetails(author, book);
+        let information = await updateDetails.updateDetails(author, book, oldAuthor);
 
         res.send(information);
     }

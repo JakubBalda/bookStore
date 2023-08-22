@@ -15,8 +15,8 @@ function mapRequestToAuthorToStoreModel(request){
 function mapAuthorToAuthorToUpdateModel(author, authorID){
     let existingAuthor = new updateAuthorModel({
         id: authorID,
-        name: author.name,
-        surname: author.surname
+        name: author.authorName,
+        surname: author.authorSurname
     })
 
     return existingAuthor;
@@ -42,4 +42,13 @@ function mapSingleAuthor(author){
     return newAuthor;
 }
 
-module.exports = {mapAuthorsToWebModel, mapRequestToAuthorToStoreModel, mapAuthorToAuthorToUpdateModel};
+function mapOldAuthorDataToWebModel(oldAuthorData){
+    let oldAuthor = authorWebModel({
+        name: String(oldAuthorData.oldAuthorName),
+        surname: String(oldAuthorData.oldAuthorSurname)
+    })
+
+    return oldAuthor;
+}
+
+module.exports = {mapAuthorsToWebModel, mapRequestToAuthorToStoreModel, mapAuthorToAuthorToUpdateModel, mapOldAuthorDataToWebModel};
