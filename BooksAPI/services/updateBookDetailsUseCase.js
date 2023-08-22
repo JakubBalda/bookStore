@@ -16,10 +16,15 @@ async function updateDetails(author, book, oldAuthor){
             logger.logInformation('Dane autora zostały poprawnie zaktualizowane, następnie aktualizacja danych książki');
             
             book.author = author.id;
-            if(await bookRepository.updateBook(book)){
-                return 'Dane zostały poprawnie zaktualizowane';
+
+            if(!await isbnExists(book)){
+                if(await bookRepository.updateBook(book)){
+                    return 'Dane zostały poprawnie zaktualizowane';
+                }else{
+                    return 'Wystąpił błąd z aktualizacją danych!';
+                }
             }else{
-                return 'Wystąpił błąd z aktualizacją danych!';
+                return 'Podany ISBN już istnieje';
             }
         }else{
             return 'Wystąpił błąd z aktualizacją danych!';
@@ -29,8 +34,19 @@ async function updateDetails(author, book, oldAuthor){
     }
 }
 
-async function isbnExists(isbn){
+async function isbnExists(book){
+    if(book.isbn !== book.oldIsbn){
+        let bookID = await bookRepository.findBookIdByIsbn(book.isbn);
 
+        if(bookID[0].ID !== undefined){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+    
 } 
 
 module.exports = {updateDetails};

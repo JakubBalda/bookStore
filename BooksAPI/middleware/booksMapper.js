@@ -114,6 +114,7 @@ function mapBookToBookToUpdateModel(book, bookID){
         publishYear: Number(book.publishYear),
         pageAmount: Number(book.pageAmount),
         genre: String(book.genre),
+        oldIsbn: String(book.oldIsbn),
     })
 
     return bookToUpdate;
