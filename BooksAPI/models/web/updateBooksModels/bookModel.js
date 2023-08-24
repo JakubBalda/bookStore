@@ -8,7 +8,7 @@ const BookSchema = new Schema({
     price: {type: Number, required: true, min: [0, 'Price cannot be negative value']},
     amount: {type: Number, min: [0, 'Amount cannot be negative value']},
     imageUrl: String,
-    imageBlob: Buffer,
+    imageBlob: Array,
     isbn: {type: String, required: true, maxLenght: 17},
     description: {type: String, maxLength: [200, 'Description must have less than 200 signsx']},
     publisher: {type: String, required: true},

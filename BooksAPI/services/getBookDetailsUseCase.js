@@ -8,7 +8,7 @@ async function getBookDetails(id){
     logger.logInformation('getBookDetailsCase.getBooksDetails requested');
     
     let bookDetails = await bookRepository.getBookDetailsById(id);
-
+    console.log(typeof(bookDetails[0].ImageBlob));
     if(!booleanFunctions.isNullOrUndefined(bookDetails[0])){
         let authorId = bookDetails[0].AuthorID; 
         
