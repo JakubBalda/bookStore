@@ -12,8 +12,8 @@ function addNewBook(bookToStore){
     let query = `INSERT INTO books (Title, AuthorID, ISBN, Description, ImageURL, Price, Amount, Publisher, PublishYear, PageAmount, Genre) 
                     VALUES ('${bookToStore.title}', ${bookToStore.author}, '${bookToStore.isbn}',
                     '${bookToStore.description}',  '${bookToStore.imageUrl}',  ${bookToStore.price},
-                    ${bookToStore.amount}, ${bookToStore.publisher}, ${bookToStore.publishYear},
-                    ${bookToStore.pageAmount}, ${bookToStore.genre})`;
+                    ${bookToStore.amount}, '${bookToStore.publisher}', ${bookToStore.publishYear},
+                    ${bookToStore.pageAmount}, '${bookToStore.genre}')`;
 
     if(database.sqlQuery(query)){
         return true;

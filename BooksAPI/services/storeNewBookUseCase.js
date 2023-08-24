@@ -39,7 +39,7 @@ async function storeNewBook(author, book){
 
     if(!validate.validateAuthor(author)){
         return "Wystąpił błąd;"
-    }else if(!isAuthorInStore(author)){
+    }else if(! await isAuthorInStore(author)){
         authorId = await addNewAuthor(author);
     }else{
         logger.logInformation('Podany autor już istnieje, wyszukuje w bazie danych');
@@ -49,7 +49,7 @@ async function storeNewBook(author, book){
     bookToStore =  mapper.mapRequestToBookToStoreModel(book, authorId[0].ID);
 
     if(await isBookInStore(bookToStore.isbn)){
-        if(validate.validateBook(bookToStore) && addNewBook(bookToStore)){
+        if(validate.validateBook(bookToStore) && await addNewBook(bookToStore)){
             logger.logInformation("Książka została dodana");
 
             return "Książka została dodana";

@@ -46,17 +46,27 @@ function mapToWebModel(books, authors){
 }
 
 function mapSingleToWebModel(book, author){
-    
-    let newBook = new bookWebModel ({
-        id: Number(book.ID),
-        author: String(author.name + ' ' +author.surname),
-        title: String(book.Title),
-        price: Number(book.Price),
-        imageBlob: Buffer(book.ImageBlob),
-        imageUrl: String(book.ImageURL),
-        genre: String(book.Genre),
-    });
-
+    let newBook;
+    if(book.ImageBlob !== null && book.ImageBlob !== undefined){
+        newBook = new bookWebModel ({
+            id: Number(book.ID),
+            author: String(author.name + ' ' +author.surname),
+            title: String(book.Title),
+            price: Number(book.Price),
+            imageBlob: Buffer(book.ImageBlob),
+            imageUrl: String(book.ImageURL),
+            genre: String(book.Genre),
+        });
+    }else{
+        newBook = new bookWebModel ({
+            id: Number(book.ID),
+            author: String(author.name + ' ' +author.surname),
+            title: String(book.Title),
+            price: Number(book.Price),
+            imageUrl: String(book.ImageURL),
+            genre: String(book.Genre),
+        });
+    }
     return newBook; 
 }
 

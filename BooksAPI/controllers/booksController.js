@@ -25,8 +25,8 @@ const authorsMapper = require('../middleware/authorsMapper');
     async function storeNewBook(req, res, next){
         logRequest('storeNewBook', req);
         
-        let author = authorsMapper.mapRequestToAuthorToStoreModel(req.query);
-        let book = booksMapper.mapRequestToBookToStoreModel(req.query);
+        let author = authorsMapper.mapRequestToAuthorToStoreModel(req.body);
+        let book = booksMapper.mapRequestToBookToStoreModel(req.body);
 
         let information = await storeNewBookUseCase.storeNewBook(author, book);
 
