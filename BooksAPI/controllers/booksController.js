@@ -24,6 +24,7 @@ const authorsMapper = require('../middleware/authorsMapper');
 
     async function storeNewBook(req, res, next){
         logRequest('storeNewBook', req);
+        const fileBuffer = req.files.bookImage.data;
         
         let author = authorsMapper.mapRequestToAuthorToStoreModel(req.body);
         let book = booksMapper.mapRequestToBookToStoreModel(req.body);
@@ -43,15 +44,20 @@ const authorsMapper = require('../middleware/authorsMapper');
 
     async function updateBookDetails(req, res, next){
         logRequest('updateBookDetails', req);
-        const fileBuffer = req.files.bookImage.data
-        console.log(fileBuffer);
+        let fileBuffer;
+        
 
         let author = authorsMapper.mapAuthorToAuthorToUpdateModel(req.body, null);
         let oldAuthor = authorsMapper.mapOldAuthorDataToWebModel(req.body);
         let book = booksMapper.mapBookToBookToUpdateModel(req.body, req.params.id);
+        let information;
 
-        let information = await updateDetails.updateDetails(author, book, oldAuthor, fileBuffer);
-
+        if(req.files !== null){
+            fileBuffer = req.files.bookImage.data;
+            information = await updateDetails.updateDetails(author, book, oldAuthor, fileBuffer);
+        }else{
+            information = await updateDetails.updateDetails(author, book, oldAuthor);
+        }
         res.send(information);
     }
 

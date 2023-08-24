@@ -51,14 +51,25 @@ function deleteBookById(bookID){
 }
 
 async function updateBook(book, image){
-    const imageHex = image.toString('hex');
+    let query = '';
+    
+    if(image !== undefined){
+        const imageHex = image.toString('hex');
 
-    let query = `UPDATE books SET Title = '${book.title}', 
-                    ISBN = '${book.isbn}', Description = '${book.description}', 
-                    Publisher = '${book.publisher}', Price = '${book.price}', Amount = '${book.amount}',
-                    PublishYear = '${book.publishYear}', PageAmount = '${book.pageAmount}', Genre = '${book.genre}',
-                    ImageURL = '${book.imageUrl}', ImageBlob = 0x${imageHex}
-                    WHERE ID = ${book.id}`;
+        query = `UPDATE books SET Title = '${book.title}', 
+                        ISBN = '${book.isbn}', Description = '${book.description}', 
+                        Publisher = '${book.publisher}', Price = '${book.price}', Amount = '${book.amount}',
+                        PublishYear = '${book.publishYear}', PageAmount = '${book.pageAmount}', Genre = '${book.genre}',
+                        ImageURL = '${book.imageUrl}', ImageBlob = 0x${imageHex}
+                        WHERE ID = ${book.id}`;
+    }else{
+        query = `UPDATE books SET Title = '${book.title}', 
+                        ISBN = '${book.isbn}', Description = '${book.description}', 
+                        Publisher = '${book.publisher}', Price = '${book.price}', Amount = '${book.amount}',
+                        PublishYear = '${book.publishYear}', PageAmount = '${book.pageAmount}', Genre = '${book.genre}',
+                        ImageURL = '${book.imageUrl}'
+                        WHERE ID = ${book.id}`;
+    }
     
     if(await database.sqlQuery(query)){
         return true;
