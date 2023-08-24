@@ -4,7 +4,7 @@ const authorMapper = require('../middleware/authorsMapper');
 const validate = require('../utils/dataValidator');
 const logger = require('../middleware/logger');
 
-async function updateDetails(author, book, oldAuthor){
+async function updateDetails(author, book, oldAuthor, image){
     logger.logInformation('updateBookDetailsUseCase.updateDetails requested');
     
     if(validate.validateAuthor(author) && validate.validateBook(book)){
@@ -18,7 +18,7 @@ async function updateDetails(author, book, oldAuthor){
             book.author = author.id;
 
             if(!await isbnExists(book)){
-                if(await bookRepository.updateBook(book)){
+                if(await bookRepository.updateBook(book, image)){
                     return 'Dane zostały poprawnie zaktualizowane';
                 }else{
                     return 'Wystąpił błąd z aktualizacją danych!';

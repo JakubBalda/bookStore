@@ -4,9 +4,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-
+const fileUpload = require('express-fileupload'); 
 const app = express();
 app.use(cors());
+app.use(fileUpload());
+
+app.use(express.static('public'));
 
 // require routes
 const indexRouter = require('./routes/index');
