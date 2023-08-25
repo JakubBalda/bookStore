@@ -13,8 +13,8 @@ async function addNewAuthor(newAuthor){
     return authorId;
 }
 
-function addNewBook(newBook, authorId){
-    if(booksRepository.addNewBook(newBook, authorId)){
+async function addNewBook(newBook, bookImage){
+    if(await booksRepository.addNewBook(newBook, bookImage)){
         return true;
     }else{
         return false;
@@ -34,7 +34,7 @@ async function isAuthorInStore(author){
     return booleanFunctions.isNullOrUndefined(id);
 }
 
-async function storeNewBook(author, book){
+async function storeNewBook(author, book, bookImage){
     let authorId;
 
     if(!validate.validateAuthor(author)){
@@ -46,13 +46,13 @@ async function storeNewBook(author, book){
         authorId = await authorsRepository.findAuthorByName(author);
     }
 
-    bookToStore =  mapper.mapRequestToBookToStoreModel(book, authorId[0].ID);
+    book.author = authorId[0].ID;
 
-    if(await isBookInStore(bookToStore.isbn)){
-        if(validate.validateBook(bookToStore) && await addNewBook(bookToStore)){
+    if(await isBookInStore(book.isbn)){
+        if(validate.validateBook(book) && await addNewBook(book, bookImage)){
             logger.logInformation("Książka została dodana");
 
-            return "Książka została dodana";
+            return "Added";
         }else{
             logger.logInformation("Wystąpił błąd, książka nie została dodana");
 

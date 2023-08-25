@@ -24,12 +24,15 @@ const authorsMapper = require('../middleware/authorsMapper');
 
     async function storeNewBook(req, res, next){
         logRequest('storeNewBook', req);
+        if(req.files === null)
+            res.send('Nie wybrano zdjęcia okładki');
+
         const fileBuffer = req.files.bookImage.data;
         
         let author = authorsMapper.mapRequestToAuthorToStoreModel(req.body);
         let book = booksMapper.mapRequestToBookToStoreModel(req.body);
 
-        let information = await storeNewBookUseCase.storeNewBook(author, book);
+        let information = await storeNewBookUseCase.storeNewBook(author, book, fileBuffer);
 
         res.send(information);
     }

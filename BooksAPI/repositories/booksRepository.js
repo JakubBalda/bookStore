@@ -8,12 +8,14 @@ async function getAllBooks(){
     return books;
 }
 
-function addNewBook(bookToStore){
-    let query = `INSERT INTO books (Title, AuthorID, ISBN, Description, ImageURL, Price, Amount, Publisher, PublishYear, PageAmount, Genre) 
-                    VALUES ('${bookToStore.title}', ${bookToStore.author}, '${bookToStore.isbn}',
-                    '${bookToStore.description}',  '${bookToStore.imageUrl}',  ${bookToStore.price},
-                    ${bookToStore.amount}, '${bookToStore.publisher}', ${bookToStore.publishYear},
-                    ${bookToStore.pageAmount}, '${bookToStore.genre}')`;
+async function addNewBook(book, bookImage){
+    const imageHex = bookImage.toString('hex');
+
+    let query = `INSERT INTO books (Title, AuthorID, ISBN, Description, ImageURL, Price, Amount, Publisher, PublishYear, PageAmount, Genre, ImageBlob) 
+                    VALUES ('${book.title}', ${book.author}, '${book.isbn}',
+                    '${book.description}', '${book.imageUrl}', ${book.price},
+                    ${book.amount}, '${book.publisher}', ${book.publishYear},
+                    ${book.pageAmount}, '${book.genre}', 0x${imageHex})`;
 
     if(database.sqlQuery(query)){
         return true;
@@ -52,7 +54,7 @@ function deleteBookById(bookID){
 
 async function updateBook(book, image){
     let query = '';
-    
+
     if(image !== undefined){
         const imageHex = image.toString('hex');
 
