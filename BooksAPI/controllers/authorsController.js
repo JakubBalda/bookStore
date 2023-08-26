@@ -9,4 +9,8 @@ async function getAllAuthors(req, res, next){
     res.send(allAuthors);
 }
 
-module.exports = {getAllAuthors};
+async function storeFavouriteAuthors(req, res, next){
+
+}
+
+module.exports = {getAllAuthors, storeFavouriteAuthors};
