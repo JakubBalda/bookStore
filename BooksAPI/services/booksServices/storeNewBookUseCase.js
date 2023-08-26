@@ -1,9 +1,8 @@
-const mapper = require('../middleware/booksMapper');
-const logger = require('../middleware/logger');
-const booksRepository = require('../repositories/booksRepository');
-const authorsRepository = require('../repositories/authorsRepository');
-const booleanFunctions = require('../utils/booleanFunctions');
-const validate = require('../utils/dataValidator'); 
+const logger = require('../../middleware/logger');
+const booksRepository = require('../../repositories/booksRepository');
+const authorsRepository = require('../../repositories/authorsRepository');
+const booleanFunctions = require('../../utils/booleanFunctions');
+const validate = require('../../utils/dataValidator'); 
 
 
 async function addNewAuthor(newAuthor){

@@ -1,8 +1,8 @@
-const bookRepository = require('../repositories/booksRepository')
-const authorsRepository = require('../repositories/authorsRepository')
-const logger = require('../middleware/logger');
-const mapper = require('../middleware/booksMapper');
-const booleanFunctions = require('../utils/booleanFunctions');
+const bookRepository = require('../../repositories/booksRepository')
+const authorsRepository = require('../../repositories/authorsRepository')
+const logger = require('../../middleware/logger');
+const mapper = require('../../middleware/booksMapper');
+const booleanFunctions = require('../../utils/booleanFunctions');
 
 async function getBookDetails(id){
     logger.logInformation('getBookDetailsCase.getBooksDetails requested');
