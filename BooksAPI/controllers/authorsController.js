@@ -1,11 +1,12 @@
-const authorsMapper = require('../middleware/authorsMapper');
 const logger = require('../middleware/logger');
+const getAllAuthorsUseCase = require('../services/authorsServices/getAllAuthorsUseCase');
 
 
 async function getAllAuthors(req, res, next){
     logger.logRequest('getAllAuthors', req);
 
-    res.send('got it');
+    let allAuthors = await getAllAuthorsUseCase.getAuthors();
+    res.send(allAuthors);
 }
 
 module.exports = {getAllAuthors};
