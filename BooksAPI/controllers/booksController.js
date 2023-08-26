@@ -2,7 +2,7 @@ const getAllBooksUseCase = require('../services/getAllBooksUseCase');
 const getBookUseCase = require('../services/getBookDetailsUseCase');
 const storeNewBookUseCase = require('../services/storeNewBookUseCase');
 const deleteBookUseCase = require('../services/deleteBookUseCase');
-const updateDetails = require('../services/updateBookDetailsUseCase');
+const updateDetailsUseCase = require('../services/updateBookDetailsUseCase');
 const getBookGenresUseCase = require('../services/getBookGenresUseCase');
 const logger = require('../middleware/logger');
 const booksMapper = require('../middleware/booksMapper');
@@ -57,9 +57,9 @@ const authorsMapper = require('../middleware/authorsMapper');
 
         if(req.files !== null){
             fileBuffer = req.files.bookImage.data;
-            information = await updateDetails.updateDetails(author, book, oldAuthor, fileBuffer);
+            information = await updateDetailsUseCase.updateDetails(author, book, oldAuthor, fileBuffer);
         }else{
-            information = await updateDetails.updateDetails(author, book, oldAuthor);
+            information = await updateDetailsUseCase.updateDetails(author, book, oldAuthor);
         }
         res.send(information);
     }
