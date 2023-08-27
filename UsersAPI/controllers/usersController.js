@@ -58,10 +58,10 @@ async function storeFavouriteAuthors(req, res, next){
     logRequest('storeFavouriteAuthors', req);
     
     let authors = JSON.stringify(req.body[1]);
-    console.log(authors);
+    console.log(typeof(authors));
     let information = await setFavouriteAuthorsUseCase.setFavouriteAuthors(authors, req.body[0]);
 
-    res.send('information');
+    res.send(information);
 }
 
 module.exports = {login, register, getAllUserData, updateUserData, updateUserPassword, storeFavouriteAuthors}

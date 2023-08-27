@@ -54,4 +54,35 @@ async function updateUserPassword(userPassword, userId){
     return await database.sqlQuery(query);
 }
 
-module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, getAllDetails, updateUserDetails, updateUserPassword};
+async function findUserById(userId, tableName){
+    let query = `SELECT ID from ${tableName} WHERE UserID = ${userId}`;
+
+    return await database.sqlQuery(query);
+}
+
+async function addFavouriteAuthors(authors, userId){
+    let query = `INSERT INTO favourite_authors (UserID, Authors) VALUES (${userId}, '${authors}')`;
+
+    try{
+        await database.sqlQuery(query); 
+        return 'Added';
+    }catch(err){
+        return err;
+    }
+    
+}
+
+async function updateFavouriteAuthors(authors, ID){
+    let query = `UPDATE favourite_authors SET Authors = '${authors}' WHERE ID = ${ID}`;
+
+    try{
+        await database.sqlQuery(query); 
+        return 'Updated';
+    }catch(err){
+        return err;
+    }
+}
+
+module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, 
+    getAllDetails, updateUserDetails, updateUserPassword, findUserById, addFavouriteAuthors,
+    updateFavouriteAuthors};
