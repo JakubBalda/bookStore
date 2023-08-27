@@ -83,6 +83,16 @@ async function updateFavouriteAuthors(authors, ID){
     }
 }
 
+async function getFavouriteAuthorsByUserId(userId){
+    let query = `SELECT Authors FROM favourite_authors WHERE UserID = ${userId}`;
+
+    try{
+        return await database.sqlQuery(query); 
+    }catch(err){
+        return err;
+    }
+}
+
 module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, 
     getAllDetails, updateUserDetails, updateUserPassword, findUserById, addFavouriteAuthors,
-    updateFavouriteAuthors};
+    updateFavouriteAuthors, getFavouriteAuthorsByUserId};

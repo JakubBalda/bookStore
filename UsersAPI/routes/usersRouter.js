@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const { login, register, getAllUserData, updateUserData, updateUserPassword, storeFavouriteAuthors } = require('../controllers/usersController');
+const { login, register, getAllUserData, updateUserData, updateUserPassword,
+         storeFavouriteAuthors, getFavouriteAuthors } = require('../controllers/usersController');
 
 /* POST Login /api/users/login. */
 router.post('/login', login);
@@ -19,5 +20,8 @@ router.put('/updatePassword/:id', updateUserPassword);
 
 /* POST StoreFavouriteAuthors /api/users/favouriteAuthors */
 router.post('/favouriteAuthors', storeFavouriteAuthors)
+
+/*GET GetFavouriteAuthors /api/users/getFavouriteAuthors/:id */
+router.get('/getFavouriteAuthors/:id', getFavouriteAuthors)
 
 module.exports = router;
