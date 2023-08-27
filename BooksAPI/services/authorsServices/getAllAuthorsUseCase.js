@@ -3,7 +3,7 @@ const authorsRepository = require('../../repositories/authorsRepository');
 const authorsMapper = require('../../middleware/authorsMapper');
 
 async function getAuthors(){
-    logger.logInformation('getAllAuthirsUseCase.getAuthors requested');
+    logger.logInformation('getAllAuthorsUseCase.getAuthors requested');
 
     let authors = await authorsRepository.getAllAuthors();
     authors = authorsMapper.mapAuthorsToWebModel(authors);
