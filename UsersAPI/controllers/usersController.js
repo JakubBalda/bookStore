@@ -5,6 +5,8 @@ const userRegisterUseCase = require('../services/userRegisterUseCase');
 const getAllUserDetailsUseCase = require('../services/getAllUserDetails');
 const updateUserDataUseCase = require('../services/updateUserDataUseCase');
 const updateUserPasswordUseCase = require('../services/updateUserPasswordUseCase');
+const setFavouriteAuthorsUseCase = require('../services/setFavouriteAuthorsUseCase');
+
 
 async function login(req, res, next){
     logRequest('login', req);
@@ -52,7 +54,17 @@ async function updateUserPassword(req, res, next){
 
 }
 
-module.exports = {login, register, getAllUserData, updateUserData, updateUserPassword}
+async function storeFavouriteAuthors(req, res, next){
+    logRequest('storeFavouriteAuthors', req);
+    
+    let authors = JSON.stringify(req.body[1]);
+    console.log(authors);
+    let information = await setFavouriteAuthorsUseCase.setFavouriteAuthors(authors, req.body[0]);
+
+    res.send('information');
+}
+
+module.exports = {login, register, getAllUserData, updateUserData, updateUserPassword, storeFavouriteAuthors}
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);

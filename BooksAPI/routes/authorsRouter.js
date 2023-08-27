@@ -5,7 +5,4 @@ const { getAllAuthors, storeFavouriteAuthors } = require('../controllers/authors
 /* GET GetAllAuthors /api/authors/allAuthors */
 router.get('/allAuthors', getAllAuthors);
 
-/* POST StoreFavouriteAuthors /api/authors/favouriteAuthors */
-router.post('favouriteAuthros', storeFavouriteAuthors)
-
 module.exports = router;
