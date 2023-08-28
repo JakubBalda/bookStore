@@ -66,8 +66,8 @@ const authorsMapper = require('../middleware/authorsMapper');
 
     async function getBookGenres(req, res, next){
         logRequest('getBookGenres', req);
-
-        let genres = await getBookGenresUseCase.getGenres();
+        
+        let genres = await getBookGenresUseCase.getGenres(req.params.location);
 
         res.send(genres)
     }

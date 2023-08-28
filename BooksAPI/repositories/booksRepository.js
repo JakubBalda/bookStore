@@ -80,8 +80,14 @@ async function updateBook(book, image){
     }
 }
 
-async function getGenres(){
-    let query = `SELECT Genre FROM Books`;
+async function getGenres(location){
+    let query;
+    
+    if(location !== 'userPanel'){
+        query = `SELECT Genre FROM Books`;
+    }else{
+        query = `SELECT DISTINCT Genre FROM Books`;
+    }
 
     let genres = database.sqlQuery(query);
     return genres;

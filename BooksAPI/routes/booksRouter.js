@@ -8,8 +8,8 @@ router.get('/', getBooks);
 /* POST StoreBook /api/books/new */
 router.post('/new', storeNewBook);
 
-/*Get BookGenres /api/books/genres */
-router.get('/genres', getBookGenres);
+/*Get BookGenres /api/books/genres/:location */
+router.get('/genres/:location', getBookGenres);
 
 /* GET GetBook /api/books/:id */
 router.get('/:id', getBookDetails);
