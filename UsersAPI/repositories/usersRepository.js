@@ -1,5 +1,6 @@
 const logger = require('../middleware/logger');
 const database = require('../database');
+const { query } = require('express');
 
 async function addNewUser(userData){
     let query = `INSERT INTO Users 
@@ -82,11 +83,15 @@ async function updateFavouriteAuthors(authors, ID){
     }
 }
 
-async function getFavouriteAuthorsByUserId(userId){
-    let query = `SELECT Authors FROM favourite_authors WHERE UserID = ${userId}`;
+async function getUserPreferencesByUserId(userId){
+    let authorsQuery = `SELECT Authors FROM favourite_authors WHERE UserID = ${userId}`;
+    let genresQuery = `SELECT Genres FROM favourite_genres WHERE UserID = ${userId}`;
 
     try{
-        return await database.sqlQuery(query); 
+        let authors = await database.sqlQuery(authorsQuery); 
+        let genres = await database.sqlQuery(genresQuery);
+
+        return [authors[0], genres[0]];
     }catch(err){
         return err;
     }
@@ -117,4 +122,4 @@ async function updateFavouriteGenres(genres, ID){
 
 module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, 
     getAllDetails, updateUserDetails, updateUserPassword, findUserById, addFavouriteAuthors,
-    updateFavouriteAuthors, getFavouriteAuthorsByUserId, addFavouriteGenres, updateFavouriteGenres};
+    updateFavouriteAuthors, getUserPreferencesByUserId, addFavouriteGenres, updateFavouriteGenres};

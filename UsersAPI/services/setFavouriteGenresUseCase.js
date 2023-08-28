@@ -1,16 +1,16 @@
 const logger = require('../middleware/logger');
 const usersRepository = require('../repositories/usersRepository');
 
-async function setFavouriteGenres(){
+async function setFavouriteGenres(genres, userId){
     logger.logInformation('setFavouriteGenresUseCase.setFavouriteGenres requested');
     let information = 'Error';
 
     if(await favouriteGenresExist(userId)){
         let ID = await usersRepository.findUserById(userId, 'favourite_genres');
 
-        information = await usersRepository.updateFavouriteGenres(authors, ID[0].ID);
+        information = await usersRepository.updateFavouriteGenres(genres, ID[0].ID);
     }else{
-        information = await usersRepository.addFavouriteGenres(authors, userId);
+        information = await usersRepository.addFavouriteGenres(genres, userId);
     }
 
     return information;

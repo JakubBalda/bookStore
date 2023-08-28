@@ -6,7 +6,8 @@ const getAllUserDetailsUseCase = require('../services/getAllUserDetails');
 const updateUserDataUseCase = require('../services/updateUserDataUseCase');
 const updateUserPasswordUseCase = require('../services/updateUserPasswordUseCase');
 const setFavouriteAuthorsUseCase = require('../services/setFavouriteAuthorsUseCase');
-const getFavouriteAuthorsUseCase = require('../services/getFavouriteAuthorsUseCase');
+const setFavouriteGenresUseCase = require('../services/setFavouriteGenresUseCase');
+const getUserPreferencesUseCase = require('../services/getUserPreferencesUseCase');
 
 async function login(req, res, next){
     logRequest('login', req);
@@ -66,7 +67,7 @@ async function storeFavouriteAuthors(req, res, next){
 async function getPreferences(req, res, next){
     logRequest('getFavouriteAuthors', req);
 
-    let favouriteAuthors = await getFavouriteAuthorsUseCase.getFavouriteAuthors(req.params.id);
+    let favouriteAuthors = await getUserPreferencesUseCase.getPreferences(req.params.id);
 
     res.send(favouriteAuthors);
 }
@@ -75,7 +76,7 @@ async function storeFavouriteGenres(req, res, next){
     logRequest('storeFavouriteGenres', req);
     
     let genres = JSON.stringify(req.body[1]);
-    //let information = await setFavouriteAuthorsUseCase.setFavouriteAuthors(genres, req.body[0]);
+    let information = await setFavouriteGenresUseCase.setFavouriteGenres(genres, req.body[0]);
 
     res.send(information);
 }
