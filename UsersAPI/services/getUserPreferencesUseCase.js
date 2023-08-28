@@ -10,9 +10,11 @@ async function getPreferences(userId){
         preferences[0] = JSON.parse(preferences[0].Authors);
         preferences[1] = JSON.parse(preferences[1].Genres);
     }else if (preferences[0] !== undefined){
-        preferences = JSON.parse(preferences[0].Authors);
+        preferences[0] = JSON.parse(preferences[0].Authors);
+        preferences[1] = '';
     }else{
-        preferences = JSON.parse(preferences[1].Genres);
+        preferences[0] = '';
+        preferences[1] = JSON.parse(preferences[1].Genres);
     }
 
     return preferences;
