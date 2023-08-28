@@ -24,4 +24,7 @@ router.post('/favouriteAuthors', storeFavouriteAuthors)
 /*GET GetFavouriteAuthors /api/users/getFavouriteAuthors/:id */
 router.get('/getFavouriteAuthors/:id', getFavouriteAuthors)
 
+/* POST StoreFavouriteGenres /api/users/favouriteGenres */
+router.post('/favouriteGenres', storeFavouriteAuthors)
+
 module.exports = router;

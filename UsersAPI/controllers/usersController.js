@@ -71,8 +71,17 @@ async function getFavouriteAuthors(req, res, next){
     res.send(favouriteAuthors);
 }
 
+async function storeFavouriteGenres(req, res, next){
+    logRequest('storeFavouriteGenres', req);
+    
+    let genres = JSON.stringify(req.body[1]);
+    //let information = await setFavouriteAuthorsUseCase.setFavouriteAuthors(genres, req.body[0]);
+
+    res.send(information);
+}
+
 module.exports = {login, register, getAllUserData, updateUserData, 
-    updateUserPassword, storeFavouriteAuthors, getFavouriteAuthors}
+    updateUserPassword, storeFavouriteAuthors, getFavouriteAuthors, storeFavouriteGenres}
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);
