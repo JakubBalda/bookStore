@@ -69,7 +69,6 @@ async function addFavouriteAuthors(authors, userId){
     }catch(err){
         return err;
     }
-    
 }
 
 async function updateFavouriteAuthors(authors, ID){
@@ -93,6 +92,29 @@ async function getFavouriteAuthorsByUserId(userId){
     }
 }
 
+async function addFavouriteGenres(genres, userId){
+    let query = `INSERT INTO favourite_genres (UserID, Genres) VALUES (${userId}, '${genres}')`;
+
+    try{
+        await database.sqlQuery(query); 
+        return 'Added';
+    }catch(err){
+        return err;
+    }
+}
+
+async function updateFavouriteGenres(genres, ID){
+    let query = `UPDATE favourite_genres SET Genres = '${genres}' WHERE ID = ${ID}`;
+
+    try{
+        await database.sqlQuery(query); 
+        return 'Updated';
+    }catch(err){
+        return err;
+    }
+}
+
+
 module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, 
     getAllDetails, updateUserDetails, updateUserPassword, findUserById, addFavouriteAuthors,
-    updateFavouriteAuthors, getFavouriteAuthorsByUserId};
+    updateFavouriteAuthors, getFavouriteAuthorsByUserId, addFavouriteGenres, updateFavouriteGenres};
