@@ -72,7 +72,7 @@ function mapSingleToWebModel(book, author){
 
 function mapSingleFromDbToWebModel(book, author){
     let newBook;
-    if(book.imageBlob !== undefined){
+    if(book.ImageBlob !== undefined){
          newBook = new bookWebModel ({
             id: Number(book.ID),
             author: String(`${author.Name} ${author.Surname}`),
@@ -104,7 +104,6 @@ function mapSingleFromDbToWebModel(book, author){
             genre: String(book.Genre)
         });
     }
-    
 
     return newBook;
 }
