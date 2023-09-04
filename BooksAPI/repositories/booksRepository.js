@@ -103,5 +103,12 @@ async function setBookRating(rating, userId, bookId){
     }
 }
 
+async function getBookRatingByUserId(userId, bookId){
+    let query = `SELECT Rating FROM Ratings WHERE UserID = ${userId} AND BookID = ${bookId}`;
+
+    return await database.sqlQuery(query);
+}
+
 module.exports = {getGenres, getBookDetailsById, addNewBook, findBookIdByIsbn, 
-                    deleteBookById, updateBook, getAllBooks, setBookRating};
+                    deleteBookById, updateBook, getAllBooks, setBookRating, getBookRatingByUserId
+                    };

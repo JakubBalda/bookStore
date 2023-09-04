@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { getBooks, updateBookDetails, getBookDetails, storeNewBook,
-            deleteBook, getBookGenres, setBookRating} = require('../controllers/booksController');
+            deleteBook, getBookGenres, setBookRating, getBookAverageRating,
+            getBookRatingByUserId} = require('../controllers/booksController');
 
 /* GET GetlAllBooks /api/books */
 router.get('/', getBooks);
@@ -22,6 +23,12 @@ router.delete('/:id', deleteBook);
 router.put('/:id', updateBookDetails);
 
 /* POST SetBookRating /api/books/setBookRating*/
-router.post('/setBookRating', setBookRating)
+router.post('/setBookRating', setBookRating);
+
+/* GET GetAverageRating /api/books/averageRating/:bookId */
+router.get('/averageRating/:bookId', getBookAverageRating);
+
+/* GET GetUserRating /api/books/userRating/:userId/:bookId */
+router.get('/userRating/:userId/:bookId', getBookRatingByUserId);
 
 module.exports = router;
