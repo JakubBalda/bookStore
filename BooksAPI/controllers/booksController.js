@@ -4,6 +4,7 @@ const storeNewBookUseCase = require('../services/booksServices/storeNewBookUseCa
 const deleteBookUseCase = require('../services/booksServices/deleteBookUseCase');
 const updateDetailsUseCase = require('../services/booksServices/updateBookDetailsUseCase');
 const getBookGenresUseCase = require('../services/booksServices/getBookGenresUseCase');
+const setBookRatingUseCase = require('../services/booksServices/setBookRatingUseCase');
 const logger = require('../middleware/logger');
 const booksMapper = require('../middleware/booksMapper');
 const authorsMapper = require('../middleware/authorsMapper');
@@ -72,8 +73,17 @@ const authorsMapper = require('../middleware/authorsMapper');
         res.send(genres)
     }
 
+    async function setBookRating(req, res, next){
+        logRequest('setBookRating', req);
+        console.log(req.body);
 
-module.exports = {getBooks, getBookDetails, storeNewBook, deleteBook, updateBookDetails, getBookGenres};
+        let information = await setBookRatingUseCase.setBookRating(req.body[0], req.body[1], req.body[2])
+        res.send(information);
+    }
+
+
+module.exports = {getBooks, getBookDetails, storeNewBook, deleteBook, 
+                    updateBookDetails, getBookGenres, setBookRating};
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);

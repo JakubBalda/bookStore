@@ -93,4 +93,15 @@ async function getGenres(location){
     return genres;
 }
 
-module.exports = {getGenres, getBookDetailsById, addNewBook, findBookIdByIsbn, deleteBookById, updateBook, getAllBooks};
+async function setBookRating(rating, userId, bookId){
+    let query = `INSERT INTO Ratings (UserID, BookID, Rating) VALUES (${userId}, ${bookId}, ${rating})`;
+
+    if(await database.sqlQuery(query)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+module.exports = {getGenres, getBookDetailsById, addNewBook, findBookIdByIsbn, 
+                    deleteBookById, updateBook, getAllBooks, setBookRating};
