@@ -5,7 +5,7 @@ async function getAverageRating(bookId){
     logger.logInformation('getBookAverageRatingUseCase.getAverageRating requested')
     let allBookRatings = await bookRepository.getAllBookRatings(bookId);
 
-    if(allBookRatings !== undefined){
+    if(allBookRatings.length !== 0){
         return {averageRating: countAverageRating(allBookRatings), rateCount: allBookRatings.length};
     }else{
         return {averageRating: 0, rateCount: 0};
