@@ -6,6 +6,7 @@ const updateDetailsUseCase = require('../services/booksServices/updateBookDetail
 const getBookGenresUseCase = require('../services/booksServices/getBookGenresUseCase');
 const setBookRatingUseCase = require('../services/booksServices/setBookRatingUseCase');
 const getBookRatingUseCase = require('../services/booksServices/getBookRatingUseCase');
+const updateBookRatingUseCase = require('../services/booksServices/updateBookRatingUseCase');
 const logger = require('../middleware/logger');
 const booksMapper = require('../middleware/booksMapper');
 const authorsMapper = require('../middleware/authorsMapper');
@@ -50,7 +51,6 @@ const authorsMapper = require('../middleware/authorsMapper');
     async function updateBookDetails(req, res, next){
         logRequest('updateBookDetails', req);
         let fileBuffer;
-        
 
         let author = authorsMapper.mapAuthorToAuthorToUpdateModel(req.body, null);
         let oldAuthor = authorsMapper.mapOldAuthorDataToWebModel(req.body);
@@ -89,16 +89,22 @@ const authorsMapper = require('../middleware/authorsMapper');
 
     async function setBookRating(req, res, next){
         logRequest('setBookRating', req);
-        console.log(req.body);
 
         let information = await setBookRatingUseCase.setBookRating(req.body[0], req.body[1], req.body[2])
+        res.send(information);
+    }
+
+    async function updateBookRating(req, res, next){
+        logRequest('updateBookRating', req);
+
+        let information = await updateBookRatingUseCase.updateRating(req.body[0], req.body[1], req.body[2])
         res.send(information);
     }
 
 
 module.exports = {getBooks, getBookDetails, storeNewBook, deleteBook, 
                     updateBookDetails, getBookGenres, setBookRating, getBookAverageRating,
-                    getBookRatingByUserId};
+                    getBookRatingByUserId, updateBookRating};
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);

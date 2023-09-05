@@ -73,11 +73,7 @@ async function updateBook(book, image){
                         WHERE ID = ${book.id}`;
     }
     
-    if(await database.sqlQuery(query)){
-        return true;
-    }else{
-        return false;
-    }
+    return await database.sqlQuery(query) ? true : false;
 }
 
 async function getGenres(location){
@@ -96,11 +92,13 @@ async function getGenres(location){
 async function setBookRating(rating, userId, bookId){
     let query = `INSERT INTO Ratings (UserID, BookID, Rating) VALUES (${userId}, ${bookId}, ${rating})`;
 
-    if(await database.sqlQuery(query)){
-        return true;
-    }else{
-        return false;
-    }
+    return await database.sqlQuery(query) ? true : false;
+}
+
+async function updateBookRating(rating, userId, bookId){
+    let query = `UPDATE Ratings SET Rating = ${rating} WHERE UserID = ${userId} AND BookID = ${bookId}`;
+    
+    return await database.sqlQuery(query) ? true : false;
 }
 
 async function getBookRatingByUserId(userId, bookId){
@@ -110,5 +108,5 @@ async function getBookRatingByUserId(userId, bookId){
 }
 
 module.exports = {getGenres, getBookDetailsById, addNewBook, findBookIdByIsbn, 
-                    deleteBookById, updateBook, getAllBooks, setBookRating, getBookRatingByUserId
-                    };
+                    deleteBookById, updateBook, getAllBooks, setBookRating, getBookRatingByUserId,
+                    updateBookRating};
