@@ -7,6 +7,7 @@ const getBookGenresUseCase = require('../services/booksServices/getBookGenresUse
 const setBookRatingUseCase = require('../services/booksServices/setBookRatingUseCase');
 const getBookRatingUseCase = require('../services/booksServices/getBookRatingUseCase');
 const updateBookRatingUseCase = require('../services/booksServices/updateBookRatingUseCase');
+const getBookAverageRatingUseCase = require('../services/booksServices/getBookAverageRatingUseCase');
 const logger = require('../middleware/logger');
 const booksMapper = require('../middleware/booksMapper');
 const authorsMapper = require('../middleware/authorsMapper');
@@ -77,6 +78,9 @@ const authorsMapper = require('../middleware/authorsMapper');
     async function getBookAverageRating(req, res, next){
         logRequest('getBookAverageRating', req);
 
+        let averageRating = await getBookAverageRatingUseCase.getAverageRating(req.params.bookId);
+
+        res.send(averageRating);
     }
 
     async function getBookRatingByUserId(req, res, next){
