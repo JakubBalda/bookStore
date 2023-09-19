@@ -119,7 +119,17 @@ async function updateFavouriteGenres(genres, ID){
     }
 }
 
+async function getDataToOrder(userId){
+    let query = `SELECT Name, Surname, City, Street, HouseNumber, FlatNumber, Postal, Mail, PhoneNumber FROM Users WHERE ID = ${userId}`;
+
+    try{
+        return await database.sqlQuery(query);
+    }catch(err){
+        return err;
+    }
+}
 
 module.exports = {addNewUser, findUserByMail, findUserByLogin, getUserLoginDataByLogin, 
     getAllDetails, updateUserDetails, updateUserPassword, findUserById, addFavouriteAuthors,
-    updateFavouriteAuthors, getUserPreferencesByUserId, addFavouriteGenres, updateFavouriteGenres};
+    updateFavouriteAuthors, getUserPreferencesByUserId, addFavouriteGenres, updateFavouriteGenres,
+    getDataToOrder};

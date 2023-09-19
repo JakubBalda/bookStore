@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { login, register, getAllUserData, updateUserData, updateUserPassword,
-         storeFavouriteAuthors, getPreferences, storeFavouriteGenres } = require('../controllers/usersController');
+         storeFavouriteAuthors, getPreferences, storeFavouriteGenres, getUserDataToOrder } = require('../controllers/usersController');
 
 /* POST Login /api/users/login. */
 router.post('/login', login);
@@ -11,6 +11,8 @@ router.post('/register', register);
 
 /* GET GetAllUserData /api/users/:id. */
 router.get('/:id', getAllUserData);
+
+router.get('/orderData/:id', getUserDataToOrder);
 
 /* PUT UpdateUserData /api/users/data/:id. */
 router.put('/updateData/:id', updateUserData);

@@ -8,6 +8,7 @@ const updateUserPasswordUseCase = require('../services/updateUserPasswordUseCase
 const setFavouriteAuthorsUseCase = require('../services/setFavouriteAuthorsUseCase');
 const setFavouriteGenresUseCase = require('../services/setFavouriteGenresUseCase');
 const getUserPreferencesUseCase = require('../services/getUserPreferencesUseCase');
+const getUserDataUseCase = require('../services/getUserDataUseCase');
 
 async function login(req, res, next){
     logRequest('login', req);
@@ -81,8 +82,15 @@ async function storeFavouriteGenres(req, res, next){
     res.send(information);
 }
 
+async function getUserDataToOrder(req, res, next){
+    logRequest('getUserDataToOrder', req);
+
+    let userDataToOrder = await getUserDataUseCase.getUserDataToOrder(req.params.id);
+    res.send(userDataToOrder[0])
+}
+
 module.exports = {login, register, getAllUserData, updateUserData, 
-    updateUserPassword, storeFavouriteAuthors, getPreferences, storeFavouriteGenres}
+    updateUserPassword, storeFavouriteAuthors, getPreferences, storeFavouriteGenres, getUserDataToOrder}
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);
