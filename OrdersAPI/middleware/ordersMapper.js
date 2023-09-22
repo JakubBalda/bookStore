@@ -1,6 +1,6 @@
 const orderModel = require('../models/orderModel');
 
-function mapNewOrder(orderData){
+function mapNewOrder(orderData, currentDate){
     let newOrder = new orderModel({
         userId: orderData[0],
         name: orderData[1].name,
@@ -12,9 +12,10 @@ function mapNewOrder(orderData){
         postal: orderData[1].postal,
         mail: orderData[1].mail,
         phoneNumber: orderData[1].phoneNumber,
-        deliverOption: orderData[1].deliverOption,
+        deliveryOption: orderData[1].deliveryOption,
         paymentOption: orderData[1].paymentOption,
         fullOrderPrice: orderData[1].fullOrderPrice,
+        date: currentDate
     })
 
     return newOrder;

@@ -5,12 +5,14 @@ const storeNewOrderUseCase = require('../services/storeNewOrderUseCase');
 
 async function storeNewOrder(req, res, next){
     logRequest('storeNewOrder', req)
+    const date = new Date();
+    const currentDate = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 
-    const newOrder = ordersMapper.mapNewOrder(req.body);
+    const newOrder = ordersMapper.mapNewOrder(req.body, currentDate);
     const orderCart = req.body[2];
 
-    const orderInformation = storeNewOrderUseCase.storeNewOrder(newOrder, orderCart)
-    res.send('info');
+    const orderInformation = await storeNewOrderUseCase.storeNewOrder(newOrder, orderCart)
+    res.send(orderInformation);
 }
 
 module.exports = { storeNewOrder }

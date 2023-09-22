@@ -13,10 +13,11 @@ const OrderSchema = new Schema({
     postal: {type: String, required: true},
     mail: {type: String, required: true},
     phoneNumber: {type: String, required: true},
-    deliverOption: {type: String, required: true},
+    deliveryOption: {type: String, required: true},
     paymentOption: {type: String, required: true},
     fullOrderPrice: {type: Number, required: true},
-    cart: {type: JSON, required: true}
+    cart: {type: JSON, required: true},
+    date: {type: String, require: true}
 })
 
 module.exports = mongoose.model('orderModel', OrderSchema);
