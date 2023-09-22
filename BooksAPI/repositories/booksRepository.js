@@ -113,6 +113,22 @@ async function getAllBookRatings(bookId){
     return await database.sqlQuery(query);
 }
 
+async function updateBookAmount(books){
+
+    try{
+        const updateQueries = books.map(book => `UPDATE Books SET Amount = Amount - ${book.amount} WHERE ID = ${book.id}`);
+        const combinedQuery = updateQueries.join('; ');
+
+        //await database.sqlQuery(combinedQuery);
+
+        return true;
+    }catch (err){
+        console.log(err)
+        return false;
+    }
+    
+}
+
 module.exports = {getGenres, getBookDetailsById, addNewBook, findBookIdByIsbn, 
                     deleteBookById, updateBook, getAllBooks, setBookRating, getBookRatingByUserId,
-                    updateBookRating, getAllBookRatings};
+                    updateBookRating, getAllBookRatings, updateBookAmount};

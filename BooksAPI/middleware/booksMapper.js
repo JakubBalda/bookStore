@@ -146,5 +146,26 @@ function mapBookToBookToUpdateModel(book, bookID){
     return bookToUpdate;
 }
 
+function mapOrderedBooksToAmountChangeModel(books){
+    let orderedBooks = [];
 
-module.exports = {mapCollection, mapSingle, mapToWebModel, mapSingleFromDbToWebModel, mapRequestToBookToStoreModel, mapBookToBookToUpdateModel};
+    for(let i = 0; i < books.length; i++){
+        let book = mapSingleBookToAmountChangeModel(books[i]);
+
+        orderedBooks.push(book);
+    }
+
+    return orderedBooks;
+}
+
+function mapSingleBookToAmountChangeModel(book){
+    let newOrderedBook = new bookModel({
+        id: book.bookId,
+        amount: book.amount
+    })
+
+    return newOrderedBook;
+}
+
+module.exports = {mapCollection, mapSingle, mapToWebModel, mapSingleFromDbToWebModel, mapRequestToBookToStoreModel, 
+                    mapBookToBookToUpdateModel, mapOrderedBooksToAmountChangeModel};
