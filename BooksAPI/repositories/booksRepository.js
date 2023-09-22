@@ -117,9 +117,8 @@ async function updateBookAmount(books){
 
     try{
         const updateQueries = books.map(book => `UPDATE Books SET Amount = Amount - ${book.amount} WHERE ID = ${book.id}`);
-        const combinedQuery = updateQueries.join('; ');
 
-        //await database.sqlQuery(combinedQuery);
+        await database.sqlQueries(updateQueries);
 
         return true;
     }catch (err){
