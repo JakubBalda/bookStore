@@ -35,6 +35,31 @@ function mapAllUserOrders(orders){
 }
 
 function mapSingleUserOrder(order){
+    switch(order.DeliveryOption){
+        case 'DHL':{
+            order.DeliveryOption = 'Kurier DHL'
+            break;
+        }
+        case 'DPD':{
+            order.DeliveryOption = 'Kurier DPD'
+            break;
+        }
+        case 'personal':{
+            order.DeliveryOption = 'Odbiór osobisty'
+            break;
+        }
+    }
+
+    switch(order.PaymentOption){
+        case 'pickup':{
+            order.PaymentOption = 'Płatność przy odbiorze'
+            break;
+        }
+        case 'traditional':{
+            order.PaymentOption = 'Przelew tradycyjny'
+            break;
+        }
+    }
     const userOrder = new getOrderModel({
         orderId: order.OrderID,
         deliveryOption: order.DeliveryOption,

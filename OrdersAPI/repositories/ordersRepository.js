@@ -2,13 +2,13 @@ const logger = require('../middleware/logger');
 const database = require('../database');
 
 async function getUserOrders(userId){
-    let query = `SELECT OrderId, DeliveryOption, PaymentOption, FullOrderPrice, OrderDate FROM Orders WHERE UserID = ${userId}`;
+    let query = `SELECT OrderID, DeliveryOption, PaymentOption, FullOrderPrice, OrderDate FROM Orders WHERE UserID = ${userId}`;
 
     try{
         return await database.sqlQuery(query);
     }catch(err){
         console.log(err);
-        
+
         return undefined;
     }
 }
