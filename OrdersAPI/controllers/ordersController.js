@@ -3,6 +3,7 @@ const ordersMapper = require('../middleware/ordersMapper');
 
 const storeNewOrderUseCase = require('../services/storeNewOrderUseCase');
 const getAllUserOrdersUseCase = require('../services/getAllUserOrdersUseCase');
+const getOrderDetailsUseCase = require('../services/getOrderDetailsUseCase');
 
 async function getUserOrders(req, res, next){
     logRequest('getUserOrders', req);
@@ -15,7 +16,9 @@ async function getUserOrders(req, res, next){
 async function getUserOrderDetails(req, res, next){
     logRequest('getUserOrderDetails', req);
 
-    res.send('info');
+    const orderDetails = await getOrderDetailsUseCase.getDetails(req.params.orderId)
+
+    res.send(orderDetails);
 }
 
 async function storeNewOrder(req, res, next){

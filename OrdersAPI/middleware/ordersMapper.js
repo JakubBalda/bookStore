@@ -1,6 +1,7 @@
 const storeNewOrderModel = require('../models/storeNewOrderModels/orderModel');
 const ordersModel = require('../models/getOrdersModels/OrdersDTO');
 const getOrderModel = require('../models/getOrdersModels/OrderDTO');
+const getOrderDetailsModel = require('../models/getOrdersModels/OrderDetailsDTO');
 
 function mapNewOrder(orderData, currentDate){
     let newOrder = new storeNewOrderModel({
@@ -35,31 +36,9 @@ function mapAllUserOrders(orders){
 }
 
 function mapSingleUserOrder(order){
-    switch(order.DeliveryOption){
-        case 'DHL':{
-            order.DeliveryOption = 'Kurier DHL'
-            break;
-        }
-        case 'DPD':{
-            order.DeliveryOption = 'Kurier DPD'
-            break;
-        }
-        case 'personal':{
-            order.DeliveryOption = 'Odbiór osobisty'
-            break;
-        }
-    }
-
-    switch(order.PaymentOption){
-        case 'pickup':{
-            order.PaymentOption = 'Płatność przy odbiorze'
-            break;
-        }
-        case 'traditional':{
-            order.PaymentOption = 'Przelew tradycyjny'
-            break;
-        }
-    }
+    order.DeliveryOption = changeDeliveryOptionName(order.DeliveryOption);
+    order.PaymentOption = changePaymentOptionName(order.PaymentOption);
+    
     const userOrder = new getOrderModel({
         orderId: order.OrderID,
         deliveryOption: order.DeliveryOption,
@@ -71,4 +50,67 @@ function mapSingleUserOrder(order){
     return userOrder;
 }
 
-module.exports = {mapNewOrder, mapAllUserOrders}
+function mapOrderDetails(order){
+    order.DeliveryOption = changeDeliveryOptionName(order.DeliveryOption);
+    order.PaymentOption = changePaymentOptionName(order.PaymentOption);
+
+    const orderDetails = new getOrderDetailsModel({
+        orderId: order.OrderID,
+        name: order.Name,
+        surname: order.Surname,
+        city: order.City,
+        street: order.Street,
+        houseNumber: order.HouseNumber,
+        flatNumber: order.FlatNumber,
+        postal: order.Postal,
+        mail: order.Mail,
+        phoneNumber: order.PhoneNumber,
+        deliveryOption: order.DeliveryOption,
+        paymentOption: order.PaymentOption,
+        fullOrderPrice: order.FullOrderPrice,
+        cart: order.Cart,
+        orderDate: order.OrderDate,
+        status: order.Status
+    })
+
+    return orderDetails;
+}
+
+function changePaymentOptionName(paymentOption){
+    let newPaymentOptionName = '';
+    switch(paymentOption){
+        case 'pickup':{
+            newPaymentOptionName = 'Płatność przy odbiorze'
+            break;
+        }
+        case 'traditional':{
+            newPaymentOptionName = 'Przelew tradycyjny'
+            break;
+        }
+    }
+
+    return newPaymentOptionName;
+}
+
+function changeDeliveryOptionName(deliveryOption){
+    let newDeliveryOptionName = '';
+
+    switch(deliveryOption){
+        case 'DHL':{
+            newDeliveryOptionName = 'Kurier DHL'
+            break;
+        }
+        case 'DPD':{
+            newDeliveryOptionName = 'Kurier DPD'
+            break;
+        }
+        case 'personal':{
+            newDeliveryOptionName = 'Odbiór osobisty'
+            break;
+        }
+    }
+
+    return newDeliveryOptionName;
+}
+
+module.exports = {mapNewOrder, mapAllUserOrders, mapOrderDetails}

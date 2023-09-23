@@ -13,8 +13,17 @@ async function getUserOrders(userId){
     }
 }
 
-async function getOrderDetails(){
+async function getOrderDetails(orderId){
+    let query = `SELECT OrderID, Name, Surname, City, Street, HouseNumber, FlatNumber, Postal, Mail, PhoneNumber, DeliveryOption,
+                    PaymentOption, FullOrderPrice, Cart, Status, OrderDate FROM Orders WHERE OrderID = ${orderId}`;
 
+    try{
+        return await database.sqlQuery(query);
+    }catch(err){
+        console.log(err);
+
+        return undefined;
+    }
 }
 
 async function storeOrder(orderData, orderCart){
