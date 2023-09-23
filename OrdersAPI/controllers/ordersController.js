@@ -2,11 +2,14 @@ const logger = require('../middleware/logger');
 const ordersMapper = require('../middleware/ordersMapper');
 
 const storeNewOrderUseCase = require('../services/storeNewOrderUseCase');
+const getAllUserOrdersUseCase = require('../services/getAllUserOrdersUseCase');
 
 async function getUserOrders(req, res, next){
     logRequest('getUserOrders', req);
 
-    res.send('info');
+    const userOrders = await getAllUserOrdersUseCase.getAllUserOrders(req.params.userId);
+
+    res.send(userOrders);
 }
 
 async function getUserOrderDetails(req, res, next){

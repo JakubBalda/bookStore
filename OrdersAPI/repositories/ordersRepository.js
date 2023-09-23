@@ -1,6 +1,22 @@
 const logger = require('../middleware/logger');
 const database = require('../database');
 
+async function getUserOrders(userId){
+    let query = `SELECT OrderId, DeliveryOption, PaymentOption, FullOrderPrice, OrderDate FROM Orders WHERE UserID = ${userId}`;
+
+    try{
+        return await database.sqlQuery(query);
+    }catch(err){
+        console.log(err);
+        
+        return undefined;
+    }
+}
+
+async function getOrderDetails(){
+
+}
+
 async function storeOrder(orderData, orderCart){
     orderCart = JSON.stringify(orderCart);
 
@@ -20,4 +36,4 @@ async function storeOrder(orderData, orderCart){
     }
 }
 
-module.exports = { storeOrder }
+module.exports = { storeOrder, getUserOrders, getOrderDetails }
