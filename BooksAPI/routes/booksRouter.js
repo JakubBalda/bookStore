@@ -22,6 +22,7 @@ router.delete('/:id', deleteBook);
 /* PUT UpdateBookRating /api/books/updateBookRating */
 router.put('/updateBookRating', updateBookRating);
 
+/* PUT UpdateBookAmount /api/books/updateBookamount */
 router.put('/updateBookAmount', updateBookamount)
 
 /* PUT UpdateDetails /api/books/:id */
