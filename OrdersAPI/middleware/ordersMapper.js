@@ -1,7 +1,9 @@
-const orderModel = require('../models/orderModel');
+const storeNewOrderModel = require('../models/storeNewOrderModels/orderModel');
+const ordersModel = require('../models/getOrdersModels/OrdersDTO');
+const getOrderModel = require('../models/getOrdersModels/OrderDTO');
 
 function mapNewOrder(orderData, currentDate){
-    let newOrder = new orderModel({
+    let newOrder = new storeNewOrderModel({
         userId: orderData[0],
         name: orderData[1].name,
         surname: orderData[1].surname,
@@ -21,4 +23,27 @@ function mapNewOrder(orderData, currentDate){
     return newOrder;
 }
 
-module.exports = {mapNewOrder}
+function mapAllUserOrders(orders){
+    let userOrders = new ordersModel();
+
+    for(let i = 0; i < orders.length; i++){
+        let userOrder = mapSingleUserOrder(orders[i]);
+        userOrders.orders.push(userOrder);
+    }
+
+    return userOrders;
+}
+
+function mapSingleUserOrder(order){
+    const userOrder = new getOrderModel({
+        orderId: order.OrderID,
+        deliveryOption: order.DeliveryOption,
+        paymentOption: order.PaymentOption,
+        fullOrderPrice: order.FullOrderPrice,
+        date: order.OrderDate
+    });
+
+    return userOrder;
+}
+
+module.exports = {mapNewOrder, mapAllUserOrders}

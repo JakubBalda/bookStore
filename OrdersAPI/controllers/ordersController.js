@@ -3,8 +3,21 @@ const ordersMapper = require('../middleware/ordersMapper');
 
 const storeNewOrderUseCase = require('../services/storeNewOrderUseCase');
 
+async function getUserOrders(req, res, next){
+    logRequest('getUserOrders', req);
+
+    res.send('info');
+}
+
+async function getUserOrderDetails(req, res, next){
+    logRequest('getUserOrderDetails', req);
+
+    res.send('info');
+}
+
 async function storeNewOrder(req, res, next){
-    logRequest('storeNewOrder', req)
+    logRequest('storeNewOrder', req);
+
     const date = new Date();
     const currentDate = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
 
@@ -15,7 +28,7 @@ async function storeNewOrder(req, res, next){
     res.send(orderInformation);
 }
 
-module.exports = { storeNewOrder }
+module.exports = { storeNewOrder, getUserOrders, getUserOrderDetails }
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);
