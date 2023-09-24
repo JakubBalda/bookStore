@@ -18,6 +18,3 @@ async function getUserReservations(userId){
 
 module.exports = { getUserReservations };
 
-function changeDateFormat(){
-
-}
