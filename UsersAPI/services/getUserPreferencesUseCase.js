@@ -12,9 +12,12 @@ async function getPreferences(userId){
     }else if (preferences[0] !== undefined){
         preferences[0] = JSON.parse(preferences[0].Authors);
         preferences[1] = '';
-    }else{
+    }else if (preferences[1] !== undefined){
         preferences[0] = '';
         preferences[1] = JSON.parse(preferences[1].Genres);
+    }else{
+        preferences[0] = '';
+        preferences[1] = '';
     }
 
     return preferences;
