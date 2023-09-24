@@ -60,8 +60,15 @@ async function storeNewReservation(reservationData){
     }
 }
 
-async function getUserReservations(reservationData){
+async function getUserReservations(userId){
+    let query = `SELECT ReservationID, Cart, ReservationDate, ExpirationDate, Status FROM Reservations WHERE UserID = ${userId}`;
 
+    try{
+        return await database.sqlQuery(query);;
+    }catch(err){
+        logger.logInformation(err);
+        return undefined;
+    }
 }
 
 async function getReservationDetails(reservationData){
@@ -72,8 +79,6 @@ async function getActiveReservations(){
     let query = 'SELECT ReservationID, ExpirationDate FROM Reservations WHERE Status = "Oczekująca"';
 
     try{
-        
-
         return await database.sqlQuery(query);;
     }catch(err){
         logger.logInformation(err);

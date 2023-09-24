@@ -2,7 +2,9 @@ const storeNewOrderModel = require('../models/storeNewOrderModels/orderModel');
 const ordersModel = require('../models/getOrdersModels/OrdersDTO');
 const getOrderModel = require('../models/getOrdersModels/OrderDTO');
 const getOrderDetailsModel = require('../models/getOrdersModels/OrderDetailsDTO');
-const reservationModel = require('../models/storeNewReservationModels/reservationModel');
+const storeNewReservationModel = require('../models/storeNewReservationModels/reservationModel');
+const reservationsModel = require('../models/getReservationsModels/ReservationsDTO');
+const getReservationModel = require('../models/getReservationsModels/ReservationDTO');
 
 function mapNewOrder(orderData, currentDate){
     let newOrder = new storeNewOrderModel({
@@ -78,7 +80,7 @@ function mapOrderDetails(order){
 }
 
 function mapNewReservation(reservationData, dates){
-    const reservation = new reservationModel({
+    const reservation = new storeNewReservationModel({
         userId: reservationData.userId,
         cart: JSON.stringify(reservationData.cart),
         reservationDate: dates.currentDate,
@@ -88,7 +90,33 @@ function mapNewReservation(reservationData, dates){
     return reservation;
 }
 
-module.exports = {mapNewOrder, mapAllUserOrders, mapOrderDetails, mapNewReservation}
+function mapAllUserReservations(reservations){
+    let userReservations = new reservationsModel();
+
+    for(let i = 0; i < reservations.length; i++){
+        let userReservation = mapSingleReservation(reservations[i]);
+        userReservations.reservations.push(userReservation);
+    }
+
+    return userReservations;
+}
+
+function mapSingleReservation(reservation){
+    const newExpirationDate = changeDateFormat(reservation.ExpirationDate);
+    const newReservationDate = changeDateFormat(reservation.ReservationDate);
+
+    const userReservation = new getReservationModel({
+        reservationId: reservation.ReservationID,
+        cart: JSON.parse(reservation.Cart),
+        reservationDate: newReservationDate,
+        expirationDate: newExpirationDate,
+        status: reservation.Status
+    })
+
+    return userReservation;
+}
+
+module.exports = {mapNewOrder, mapAllUserOrders, mapOrderDetails, mapNewReservation, mapAllUserReservations}
 
 function changePaymentOptionName(paymentOption){
     let newPaymentOptionName = '';
@@ -125,4 +153,15 @@ function changeDeliveryOptionName(deliveryOption){
     }
 
     return newDeliveryOptionName;
+}
+
+function changeDateFormat(date){
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+
 }

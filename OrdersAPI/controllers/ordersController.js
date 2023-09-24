@@ -6,6 +6,7 @@ const getAllUserOrdersUseCase = require('../services/getAllUserOrdersUseCase');
 const getOrderDetailsUseCase = require('../services/getOrderDetailsUseCase');
 const storeNewReservationUseCase = require('../services/storeNewReservationUseCase');
 const checkReservationExpirationDateUseCase = require('../services/checkReservationExpirationDateUseCase');
+const getAllUserReservationsUseCase = require('../services/getAllUserReservationsUseCase');
 
 async function getUserOrders(req, res, next){
     logRequest('getUserOrders', req);
@@ -44,11 +45,18 @@ async function storeNewReservation(req, res, next){
     res.send(information)
 }
 
+async function getUserReservations(req, res, next){
+    logRequest('getUserReservations', req);
+
+    const userReservations = await getAllUserReservationsUseCase.getUserReservations(req.params.userId);
+    res.send(userReservations);
+}
+
+module.exports = { storeNewOrder, getUserOrders, getUserOrderDetails, storeNewReservation, checkReservationExpirationDate, getUserReservations }
+
 async function checkReservationExpirationDate(){
     await checkReservationExpirationDateUseCase.checkExpiration();
 }
-
-module.exports = { storeNewOrder, getUserOrders, getUserOrderDetails, storeNewReservation, checkReservationExpirationDate }
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);
