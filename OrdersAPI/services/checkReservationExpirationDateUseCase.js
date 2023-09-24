@@ -8,8 +8,17 @@ async function checkExpiration(){
     const currentDate = getCurrentDate();
 
     if(activeReservations !== undefined && activeReservations.length > 0){
-        array.forEach(reservation => {
-            if(reservation.ExpirationDate <= currentDate){
+        activeReservations.forEach(reservation => {
+
+            const year = reservation.ExpirationDate.getFullYear();
+            const month = (reservation.ExpirationDate.getMonth() + 1).toString().padStart(2, '0');
+            const day = reservation.ExpirationDate.getDate().toString().padStart(2, '0');
+            const hours = reservation.ExpirationDate.getHours().toString().padStart(2, '0');
+            const minutes = reservation.ExpirationDate.getMinutes().toString().padStart(2, '0');
+
+            const expirationDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+            
+            if(expirationDate <= currentDate){
                 reservationsToCancel.push(reservation.ReservationID)
             }
         });

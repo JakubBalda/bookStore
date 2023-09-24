@@ -48,7 +48,7 @@ async function storeOrder(orderData, orderCart){
 async function storeNewReservation(reservationData){
     let query = `INSERT INTO Reservations (UserID, Cart, ReservationDate, ExpirationDate, Status) VALUES
                     (${reservationData.userId}, '${reservationData.cart}', '${reservationData.reservationDate}',
-                    '${reservationData.expirationDate}','Oczekujące')`;
+                    '${reservationData.expirationDate}','Oczekująca')`;
 
     try{
         await database.sqlQuery(query);
@@ -69,12 +69,12 @@ async function getReservationDetails(reservationData){
 }
 
 async function getActiveReservations(){
-    let query = 'SELECT ReservationID, ExpirationDate FROM Reservations WHERE Status = "Oczekujące"';
+    let query = 'SELECT ReservationID, ExpirationDate FROM Reservations WHERE Status = "Oczekująca"';
 
     try{
-        await database.sqlQuery(query);
+        
 
-        return true;
+        return await database.sqlQuery(query);;
     }catch(err){
         logger.logInformation(err);
         return undefined;
@@ -84,9 +84,9 @@ async function getActiveReservations(){
 async function changeReservationsStatus(reservations){
     
     try{
-        const updateQueries = reservations.map(reservation => `UPDATE Reservations SET Status = "Anulowana" WHERE ID = ${reservation}`);
+        const updateQueries = reservations.map(reservation => `UPDATE Reservations SET Status = "Anulowana" WHERE ReservationID = ${reservation}`);
 
-        await database.updateQueries(updateQueries);
+        await database.sqlQueries(updateQueries);
 
         return true;
     }catch(err){
