@@ -7,8 +7,12 @@ const cors = require('cors');
 
 const indexRouter = require('./routes/index');
 const orderssRouter = require('./routes/ordersRouter');
+const reservationChecker = require('./middleware/reservationChecker');
+
+reservationChecker.checkReservationExpiration();
 
 const app = express();
+
 app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

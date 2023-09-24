@@ -10,4 +10,16 @@ async function sqlQuery(query){
     return data;
 }
 
-module.exports = {sqlQuery};
+async function sqlQueries(queries){
+    const queryExecute = util.promisify(dbConfig.databasePool.query).bind(dbConfig.databasePool);
+
+    try{
+        const results = await Promise.all(queries.map(query => queryExecute(query)));
+
+        return results;
+    }catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {sqlQuery, sqlQueries};

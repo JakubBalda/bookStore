@@ -68,4 +68,31 @@ async function getReservationDetails(reservationData){
 
 }
 
-module.exports = { storeOrder, getUserOrders, getOrderDetails, storeNewReservation, getUserReservations, getReservationDetails }
+async function getActiveReservations(){
+    let query = 'SELECT ReservationID, ExpirationDate FROM Reservations WHERE Status = "Oczekujące"';
+
+    try{
+        await database.sqlQuery(query);
+
+        return true;
+    }catch(err){
+        logger.logInformation(err);
+        return undefined;
+    }
+}
+
+async function changeReservationsStatus(reservations){
+    
+    try{
+        const updateQueries = reservations.map(reservation => `UPDATE Reservations SET Status = "Anulowana" WHERE ID = ${reservation}`);
+
+        await database.updateQueries(updateQueries);
+
+        return true;
+    }catch(err){
+        logger.logInformation(err);
+        return undefined;
+    }
+}
+
+module.exports = { storeOrder, getUserOrders, getOrderDetails, storeNewReservation, getUserReservations, getReservationDetails, getActiveReservations, changeReservationsStatus }
