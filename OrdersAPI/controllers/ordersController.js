@@ -4,6 +4,7 @@ const ordersMapper = require('../middleware/ordersMapper');
 const storeNewOrderUseCase = require('../services/storeNewOrderUseCase');
 const getAllUserOrdersUseCase = require('../services/getAllUserOrdersUseCase');
 const getOrderDetailsUseCase = require('../services/getOrderDetailsUseCase');
+const storeNewReservationUseCase = require('../services/storeNewReservationUseCase');
 
 async function getUserOrders(req, res, next){
     logRequest('getUserOrders', req);
@@ -34,7 +35,15 @@ async function storeNewOrder(req, res, next){
     res.send(orderInformation);
 }
 
-module.exports = { storeNewOrder, getUserOrders, getUserOrderDetails }
+async function storeNewReservation(req, res, next){
+    logRequest('storeNewReservation', req);
+
+    const information = await storeNewReservationUseCase.storeNewReservation(req.body);
+
+    res.send(information)
+}
+
+module.exports = { storeNewOrder, getUserOrders, getUserOrderDetails, storeNewReservation }
 
 function logRequest(endpointName, req) {
     logger.logInformation(`${endpointName} endpoint requested`);

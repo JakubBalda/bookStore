@@ -2,6 +2,7 @@ const storeNewOrderModel = require('../models/storeNewOrderModels/orderModel');
 const ordersModel = require('../models/getOrdersModels/OrdersDTO');
 const getOrderModel = require('../models/getOrdersModels/OrderDTO');
 const getOrderDetailsModel = require('../models/getOrdersModels/OrderDetailsDTO');
+const reservationModel = require('../models/storeNewReservationModels/reservationModel');
 
 function mapNewOrder(orderData, currentDate){
     let newOrder = new storeNewOrderModel({
@@ -76,6 +77,19 @@ function mapOrderDetails(order){
     return orderDetails;
 }
 
+function mapNewReservation(reservationData, dates){
+    const reservation = new reservationModel({
+        userId: reservationData.userId,
+        cart: JSON.stringify(reservationData.cart),
+        reservationDate: dates.currentDate,
+        expirationDate: dates.expirationDate
+    })
+
+    return reservation;
+}
+
+module.exports = {mapNewOrder, mapAllUserOrders, mapOrderDetails, mapNewReservation}
+
 function changePaymentOptionName(paymentOption){
     let newPaymentOptionName = '';
     switch(paymentOption){
@@ -112,5 +126,3 @@ function changeDeliveryOptionName(deliveryOption){
 
     return newDeliveryOptionName;
 }
-
-module.exports = {mapNewOrder, mapAllUserOrders, mapOrderDetails}

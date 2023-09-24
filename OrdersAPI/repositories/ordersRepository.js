@@ -43,6 +43,29 @@ async function storeOrder(orderData, orderCart){
         logger.logInformation(err);
         return false;
     }
+}   
+
+async function storeNewReservation(reservationData){
+    let query = `INSERT INTO Reservations (UserID, Cart, ReservationDate, ExpirationDate, Status) VALUES
+                    (${reservationData.userId}, '${reservationData.cart}', '${reservationData.reservationDate}',
+                    '${reservationData.expirationDate}','Oczekujące')`;
+
+    try{
+        await database.sqlQuery(query);
+
+        return true;
+    }catch(err){
+        logger.logInformation(err);
+        return false;
+    }
 }
 
-module.exports = { storeOrder, getUserOrders, getOrderDetails }
+async function getUserReservations(reservationData){
+
+}
+
+async function getReservationDetails(reservationData){
+
+}
+
+module.exports = { storeOrder, getUserOrders, getOrderDetails, storeNewReservation, getUserReservations, getReservationDetails }
