@@ -26,7 +26,7 @@ async function addNewBook(book, bookImage){
 
 function getBookDetailsById(bookID){
     let query = `SELECT ID, AuthorID, Title, Price, Amount, Description, Publisher, 
-                    PublishYear, Genre, ImageURL, ImageBlob, ISBN, PageAmount FROM Books WHERE ID = ${bookID}`;
+                    PublishYear, Genre, ImageURL, ImageBlob, ISBN, PageAmount, PodcastLink FROM Books WHERE ID = ${bookID}`;
 
     let bookDetails = database.sqlQuery(query);
     logger.logData(bookDetails);

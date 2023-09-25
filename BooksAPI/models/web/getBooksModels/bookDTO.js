@@ -15,6 +15,7 @@ const BookSchema = new Schema({
     publishYear: Number,
     pageAmount: {type: Number, min: [1, 'Number of pages cannot be below 1']},
     genre: {type: String, reqired: true},
+    podcastLink: {type: String}
 })
 
 module.exports = mongoose.model('BookDTO', BookSchema);

@@ -72,7 +72,7 @@ function mapSingleToWebModel(book, author){
 
 function mapSingleFromDbToWebModel(book, author){
     let newBook;
-    if(book.ImageBlob !== undefined){
+    if(book.ImageBlob !== undefined && book.PodcastLink !== undefined){
          newBook = new bookWebModel ({
             id: Number(book.ID),
             author: String(`${author.Name} ${author.Surname}`),
@@ -86,7 +86,40 @@ function mapSingleFromDbToWebModel(book, author){
             publisher: String(book.Publisher),
             publishYear: Number(book.PublishYear),
             pageAmount: Number(book.PageAmount),
-            genre: String(book.Genre)
+            genre: String(book.Genre),
+            podcastLink: String(book.PodcastLink)
+        });
+    }else if(book.ImageBlob === undefined && book.PodcastLink !== undefined){
+        newBook = new bookWebModel ({
+            id: Number(book.ID),
+            author: String(`${author.Name} ${author.Surname}`),
+            title: String(book.Title),
+            isbn: String(book.ISBN),
+            imageUrl: String(book.ImageURL),
+            amount: Number(book.Amount),
+            price: Number(book.Price),
+            description: String(book.Description),
+            publisher: String(book.Publisher),
+            publishYear: Number(book.PublishYear),
+            pageAmount: Number(book.PageAmount),
+            genre: String(book.Genre),
+            podcastLink: String(book.PodcastLink)
+        });
+    }else if(book.ImageBlob !== undefined && book.PodcastLink === undefined){
+        newBook = new bookWebModel ({
+            id: Number(book.ID),
+            author: String(`${author.Name} ${author.Surname}`),
+            title: String(book.Title),
+            isbn: String(book.ISBN),
+            imageUrl: String(book.ImageURL),
+            imageBlob: Buffer(book.ImageBlob),
+            amount: Number(book.Amount),
+            price: Number(book.Price),
+            description: String(book.Description),
+            publisher: String(book.Publisher),
+            publishYear: Number(book.PublishYear),
+            pageAmount: Number(book.PageAmount),
+            genre: String(book.Genre),
         });
     }else{
         newBook = new bookWebModel ({
@@ -101,7 +134,7 @@ function mapSingleFromDbToWebModel(book, author){
             publisher: String(book.Publisher),
             publishYear: Number(book.PublishYear),
             pageAmount: Number(book.PageAmount),
-            genre: String(book.Genre)
+            genre: String(book.Genre),
         });
     }
 
