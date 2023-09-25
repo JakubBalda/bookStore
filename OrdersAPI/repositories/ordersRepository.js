@@ -95,7 +95,7 @@ async function getActiveReservations(){
     }
 }
 
-async function changeReservationsStatus(reservations){
+async function changeReservationsStatusToCanceled(reservations){
     
     try{
         const updateQueries = reservations.map(reservation => `UPDATE Reservations SET Status = "Anulowana" WHERE ReservationID = ${reservation}`);
@@ -109,5 +109,19 @@ async function changeReservationsStatus(reservations){
     }
 }
 
+async function changeReservationsStatusToEnded(reservation){
+   let query =  `UPDATE Reservations SET Status = "Zakończona" WHERE ReservationID = ${reservation}`;
+
+   try{
+        await database.sqlQuery(query);
+
+        return true;
+    }catch(err){
+        logger.logInformation(err);
+        return false;
+    }
+}
+
 module.exports = { storeOrder, getUserOrders, getOrderDetails, storeNewReservation, getUserReservations, 
-                        cancelReservation, getActiveReservations, changeReservationsStatus }
+                        cancelReservation, getActiveReservations, changeReservationsStatus: changeReservationsStatusToCanceled, 
+                        changeReservationsStatusToEnded }

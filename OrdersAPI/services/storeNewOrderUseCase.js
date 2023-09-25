@@ -2,14 +2,19 @@ const logger = require('../middleware/logger');
 const axios = require('axios');
 const ordersRepository = require('../repositories/ordersRepository');
 
-async function storeNewOrder(orderData, orderCart){
+async function storeNewOrder(orderData, orderCart, isFromReservation, reservationId){
     let orderInformation = true;
     
     if(await ordersRepository.storeOrder(orderData, orderCart)){
-        if(await changeBooksAmount(orderCart)){
-            orderInformation = true;
+        if(!isFromReservation){
+            if(await changeBooksAmount(orderCart)){
+                orderInformation = true;
+            }else{
+                orderInformation = false;
+            }
         }else{
-            orderInformation = false;
+            await ordersRepository.changeReservationsStatusToEnded(reservationId);
+            orderInformation = true;
         }
     }else{
         orderInformation = false;

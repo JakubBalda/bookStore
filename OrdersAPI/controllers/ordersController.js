@@ -33,8 +33,10 @@ async function storeNewOrder(req, res, next){
 
     const newOrder = ordersMapper.mapNewOrder(req.body, currentDate);
     const orderCart = req.body[2];
-
-    const orderInformation = await storeNewOrderUseCase.storeNewOrder(newOrder, orderCart)
+    const isFromReservation = req.body[3];
+    const reservationId = req.body[4] !== undefined ? req.body[4] : undefined;
+    
+    const orderInformation = await storeNewOrderUseCase.storeNewOrder(newOrder, orderCart, isFromReservation, reservationId)
     res.send(orderInformation);
 }
 
