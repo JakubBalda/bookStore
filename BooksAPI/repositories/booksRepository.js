@@ -113,7 +113,7 @@ async function getAllBookRatings(bookId){
     return await database.sqlQuery(query);
 }
 
-async function updateBookAmount(books){
+async function decreaseBookAmount(books){
 
     try{
         const updateQueries = books.map(book => `UPDATE Books SET Amount = Amount - ${book.amount} WHERE ID = ${book.id}`);
@@ -128,6 +128,21 @@ async function updateBookAmount(books){
     
 }
 
+async function increaseBookAmount(books){
+
+    try{
+        const updateQueries = books.map(book => `UPDATE Books SET Amount = Amount + ${book.amount} WHERE ID = ${book.id}`);
+
+        await database.sqlQueries(updateQueries);
+
+        return true;
+    }catch (err){
+        console.log(err)
+        return false;
+    }
+    
+}
+
 module.exports = {getGenres, getBookDetailsById, addNewBook, findBookIdByIsbn, 
                     deleteBookById, updateBook, getAllBooks, setBookRating, getBookRatingByUserId,
-                    updateBookRating, getAllBookRatings, updateBookAmount};
+                    updateBookRating, getAllBookRatings, decreaseBookAmount, increaseBookAmount};

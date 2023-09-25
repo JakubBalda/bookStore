@@ -21,7 +21,7 @@ async function storeNewOrder(orderData, orderCart){
 async function changeBooksAmount(books){
     let updateInformation = '';
 
-    await axios.put('http://localhost:5000/api/books/updateBookAmount', books)
+    await axios.put('http://localhost:5000/api/books/updateBookAmount', {books: books, method: 'decrease'})
         .then((response) => {
 
             updateInformation = response.data;

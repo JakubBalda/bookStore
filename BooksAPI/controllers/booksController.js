@@ -110,7 +110,7 @@ const authorsMapper = require('../middleware/authorsMapper');
         logRequest('updateBookamount', req);
         console.log(req.body);
 
-        let information = await updateBookAmountUseCase.updateAmount(req.body)
+        let information = await updateBookAmountUseCase.updateAmount(req.body.books, req.body.method)
         res.send(information);
     }
 
