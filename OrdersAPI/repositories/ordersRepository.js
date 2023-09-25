@@ -71,8 +71,17 @@ async function getUserReservations(userId){
     }
 }
 
-async function getReservationDetails(reservationData){
+async function cancelReservation(reservationData){
+    let query = `UPDATE Reservations SET Status = '${reservationData.status}' WHERE ReservationID = ${reservationData.reservationId}`;
 
+    try{
+        await database.sqlQuery(query);
+
+        return true;
+    }catch(err){
+        logger.logInformation(err);
+        return false;
+    }
 }
 
 async function getActiveReservations(){
@@ -100,4 +109,5 @@ async function changeReservationsStatus(reservations){
     }
 }
 
-module.exports = { storeOrder, getUserOrders, getOrderDetails, storeNewReservation, getUserReservations, getReservationDetails, getActiveReservations, changeReservationsStatus }
+module.exports = { storeOrder, getUserOrders, getOrderDetails, storeNewReservation, getUserReservations, 
+                        cancelReservation, getActiveReservations, changeReservationsStatus }

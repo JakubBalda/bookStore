@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { storeNewOrder, getUserOrders, getUserOrderDetails, storeNewReservation, getUserReservations } = require('../controllers/ordersController');
+const { storeNewOrder, getUserOrders, getUserOrderDetails, storeNewReservation, getUserReservations, 
+            cancelUserReservation } = require('../controllers/ordersController');
 
 /* GET GetUserReservations /api/orders/getUserReservations */
 router.get('/getReservations/:userId', getUserReservations);
@@ -17,5 +18,7 @@ router.post('/storeNewOrder', storeNewOrder);
 /* POST StoreNewREservation /api/orders/storeNewReservation */
 router.post('/storeNewReservation', storeNewReservation);
 
+/* PUT CancelUserReservation /api/orders/cancelReservation */
+router.put('/cancelReservation', cancelUserReservation)
 
 module.exports = router;

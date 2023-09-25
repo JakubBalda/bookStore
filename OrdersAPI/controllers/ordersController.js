@@ -7,6 +7,7 @@ const getOrderDetailsUseCase = require('../services/getOrderDetailsUseCase');
 const storeNewReservationUseCase = require('../services/storeNewReservationUseCase');
 const checkReservationExpirationDateUseCase = require('../services/checkReservationExpirationDateUseCase');
 const getAllUserReservationsUseCase = require('../services/getAllUserReservationsUseCase');
+const cancelUserReservationUseCase = require('../services/cancelUserReservationUseCase');
 
 async function getUserOrders(req, res, next){
     logRequest('getUserOrders', req);
@@ -52,7 +53,16 @@ async function getUserReservations(req, res, next){
     res.send(userReservations);
 }
 
-module.exports = { storeNewOrder, getUserOrders, getUserOrderDetails, storeNewReservation, checkReservationExpirationDate, getUserReservations }
+async function cancelUserReservation(req, res, next){
+    logRequest('cancelUserReservation', req);
+
+    cancelReservationInformation = await cancelUserReservationUseCase.cancelReservation(req.body);
+
+    res.send(cancelReservationInformation);
+}
+
+module.exports = { storeNewOrder, getUserOrders, getUserOrderDetails, storeNewReservation, checkReservationExpirationDate, 
+                    getUserReservations, cancelUserReservation }
 
 async function checkReservationExpirationDate(){
     await checkReservationExpirationDateUseCase.checkExpiration();
