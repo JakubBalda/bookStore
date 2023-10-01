@@ -129,6 +129,10 @@ function changePaymentOptionName(paymentOption){
             newPaymentOptionName = 'Przelew tradycyjny'
             break;
         }
+        case 'BLIK':{
+            newPaymentOptionName = 'BLIK'
+            break;
+        }
     }
 
     return newPaymentOptionName;
