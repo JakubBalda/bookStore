@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const ordersRepository = require('../repositories/ordersRepository');
 
 async function checkExpiration(){
@@ -25,7 +26,29 @@ async function checkExpiration(){
     }
 
     if(reservationsToCancel.length > 0){
-        await ordersRepository.changeReservationsStatus(reservationsToCancel);
+        try{
+            const booksCarts = await ordersRepository.getBooksToReturnToStock(reservationsToCancel);
+            const booksToReturnToStock = [];
+
+            booksCarts.forEach(cart => {
+                cart = JSON.parse(cart[0].Cart)
+                booksToReturnToStock.push(cart);
+            });
+
+            console.log(booksToReturnToStock);
+            
+            axios.put('http://localhost:5000/api/books/updateBookAmount', {books: booksToReturnToStock, method: 'autoIncrease'})
+                .then((response) => {
+                    updateInformation = response.data;
+                })
+                .catch((error) => {
+                    logger.logInformation(error);
+                })
+
+            await ordersRepository.changeReservationsStatus(reservationsToCancel);
+        }catch(err){
+            console.log(err)
+        }
     }
 }
 

@@ -122,6 +122,17 @@ async function changeReservationsStatusToEnded(reservation){
     }
 }
 
+async function getBooksToReturnToStock(reservationsId){
+    try{
+        const selectQueries = reservationsId.map(reservationId => `SELECT Cart FROM Reservations WHERE ReservationID = ${reservationId}`);
+
+        return await database.sqlQueries(selectQueries);;
+    }catch(err){
+        logger.logInformation(err);
+        return undefined;
+    }
+}
+
 module.exports = { storeOrder, getUserOrders, getOrderDetails, storeNewReservation, getUserReservations, 
                         cancelReservation, getActiveReservations, changeReservationsStatus: changeReservationsStatusToCanceled, 
-                        changeReservationsStatusToEnded }
+                        changeReservationsStatusToEnded, getBooksToReturnToStock }

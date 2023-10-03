@@ -28,7 +28,6 @@ async function changeBooksAmount(books){
 
     await axios.put('http://localhost:5000/api/books/updateBookAmount', {books: books, method: 'decrease'})
         .then((response) => {
-
             updateInformation = response.data;
         })
         .catch((error) => {
