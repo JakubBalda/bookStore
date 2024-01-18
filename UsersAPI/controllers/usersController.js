@@ -24,8 +24,8 @@ async function login(req, res, next){
 async function register(req, res, next){
     logRequest('register', req);
 
-    let register = userRegisterUseCase.userRegister(req.body);
-
+    let register = await userRegisterUseCase.userRegister(req.body);
+    console.log(register);
     res.send(register)
 }
 
